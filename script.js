@@ -14,7 +14,7 @@ const cardsByCategory = {
       quizFront: "What is Emotional Regulation and why is it important?",
       quizTitle: "Emotional Regulation Quiz",
       studyTitle: "",
-      studyFront: generateStackedCardContent('assets/images/EmotionalRegulation.png', 'Emotional Regulation'),
+      studyFront: generateStackedCardContent('assets/images/emotionalregulation.png', 'Emotional Regulation'),
       quizBack: "It’s the ability to manage your emotions instead of being controlled by them.\nIt matters because it helps you stay calm, think clearly, and act in ways you won’t regret.",
       studyBack: "the process of identifying and managing emotions in a constructive and healthy way"
     },
@@ -22,7 +22,7 @@ const cardsByCategory = {
       quizFront: "What are the steps to accumulate positive experiences?",
       quizTitle: "Accumulate Positive Experiences Quiz",
       studyTitle: "Accumulate Positive Experiences",
-      studyFront: "<img src='assets/images/AccumulatePEIcon.png' alt='Accumulate Positive Experiences Icon' style='max-width:100%; height:auto; display:block;'>",
+      studyFront: "<img src='assets/images/accumulatepeicon.png' alt='Accumulate Positive Experiences Icon' style='max-width:100%; height:auto; display:block;'>",
       quizBack: "🕒 Start now\n💡 Identify values\n🎯 Choose one goal\n🪜 Break into small steps\n✅ Take action and follow through",
       studyBack: "actively engaging in positive activities "
     },
@@ -30,7 +30,7 @@ const cardsByCategory = {
       quizFront: "What is the purpose of opposite action?",
       quizTitle: "Opposite Action Quiz",
       studyTitle: "Opposite Action",
-      studyFront: "<img src='assets/images/EmotionalRegulation.png' alt='Opposite Action Icon' style='max-width:100%; height:auto; display:block;'>",
+      studyFront: "<img src='assets/images/emotionalregulation.png' alt='Opposite Action Icon' style='max-width:100%; height:auto; display:block;'>",
       quizBack: "Act opposite to the urge\n💡 Example: Smile when sad",
       studyBack: "A strategy to change unhelpful emotions by changing your behavior"
     },
@@ -48,7 +48,7 @@ const cardsByCategory = {
       quizFront: "What is Distress Tolerance and why is it important?",
       quizTitle: "Distress Tolerance Quiz",
       studyTitle: "",
-      studyFront: generateStackedCardContent('assets/images/DistressTolerance.png', 'Distress Tolerance'),
+      studyFront: generateStackedCardContent('assets/images/distresstolerance.png', 'Distress Tolerance'),
       quizBack: "It helps you survive emotional crises without making things worse.\nIt’s important for staying safe and grounded when emotions feel overwhelming.",
       studyBack: "calmly and successfully navigate difficult or stressful situations without resorting to destructive or self-defeating behaviors"
     },
@@ -74,7 +74,7 @@ const cardsByCategory = {
       quizFront: "What is Interpersonal Effectiveness and why is it important?",
       quizTitle: "Interpersonal Effectiveness Quiz",
       studyTitle: "",
-      studyFront: generateStackedCardContent('assets/images/InterpersonalEffectiveness.png', 'Interpersonal Effectiveness'),
+      studyFront: generateStackedCardContent('assets/images/interpersonaleffectiveness.png', 'Interpersonal Effectiveness'),
       quizBack: "It means getting your needs met while keeping relationships healthy. \nIt’s important for setting boundaries, asking for help, and maintaining mutual respect.",
       studyBack: "improve the way we communicate with others by emphasizing empathy, kindness, setting boundaries, assertiveness, active listening, mutual respect, understanding, and emotional expression"
     },
@@ -100,7 +100,7 @@ const cardsByCategory = {
       quizFront: "What is Mindfulness and why is it important?",
       quizTitle: "Mindfulness Quiz",
       studyTitle: "",
-      studyFront: generateStackedCardContent('assets/images/Mindfulness.png', 'Mindfulness'),
+      studyFront: generateStackedCardContent('assets/images/mindfulness.png', 'Mindfulness'),
       quizBack: "It means being fully present in the moment without judgment. \nIt helps reduce stress, improve focus, and manage emotions more effectively.",
       studyBack: "intentionally attentive to the present moment"
     },
