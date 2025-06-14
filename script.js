@@ -1,3 +1,6 @@
+console.log("📱 isMobile:", window.matchMedia('(hover: none)').matches);
+
+
 // Mode toggle logic
 let currentMode = 'study';
 
