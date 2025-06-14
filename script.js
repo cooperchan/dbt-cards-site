@@ -178,41 +178,37 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (isMobile) {
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-
         if (!tappedOnce) {
           card.classList.add('flipped');
           tappedOnce = true;
         } else {
           card.classList.remove('flipped');
           tappedOnce = false;
-
           setTimeout(() => {
             const cat = card.closest('.card-stack')?.id.replace('-stack', '');
             shuffleCard(cat);
-          }, 300);
+          }, 300); // Matches flip timing
         }
       });
     } else {
-      // Desktop: hover to flip
       card.addEventListener('mouseenter', () => card.classList.add('flipped'));
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
-
-      // Desktop: click to advance
       card.addEventListener('click', (e) => {
         e.stopPropagation();
+        // Prevent lingering flip state before rendering next
+        card.classList.remove('flipped');
         const cat = card.closest('.card-stack')?.id.replace('-stack', '');
         shuffleCard(cat);
       });
     }
 
-    // Ensure each new top card starts unflipped
-    setTimeout(() => {
-      card.classList.remove('flipped');
-    }, 0);
+    // Ensure card starts unflipped (prevent initial flicker)
+    card.classList.remove('flipped');
   }
 
   return card;
 }
+
 
 
 function renderDeck(category) {
