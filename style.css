@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -161,8 +163,8 @@ h1 {
 
 /* Responsive for mobile */
 @media (max-width: 768px) {
-  body {
-    padding: 10px;
+  html, body {
+    max-width: 100%;
     overflow-x: hidden;
   }
 
@@ -170,35 +172,29 @@ h1 {
     grid-template-columns: 1fr;
     gap: 30px;
     padding: 10px;
+    width: 100%;
   }
 
   .card-stack {
-    width: 90vw;
-    max-width: 350px;
+    width: 100%;
+    max-width: 340px;
     height: auto;
+    margin: 0 auto;
   }
 
   .card {
     width: 100%;
     max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .card-title {
-    font-size: 1rem;
-  }
-
-  .card-content {
-    font-size: 0.9rem;
   }
 
   .deck-label {
     font-size: 1rem;
     white-space: normal;
-    overflow: visible;
-    text-overflow: initial;
+    text-align: center;
+    padding: 0 10px;
   }
 }
+
 
 .study-layout {
   flex: 1;
