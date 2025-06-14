@@ -134,8 +134,6 @@ const currentIndices = {
 };
 
 function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
-  console.log("🖥 isMobile:", 'ontouchstart' in window || navigator.maxTouchPoints > 0);
-
   const card = document.createElement('div');
   card.classList.add('card');
   card.style.setProperty('--i', layerIndex);
@@ -174,17 +172,14 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (currentMode === 'study') card.classList.add('float');
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-    //const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    //const isMobile = window.matchMedia('(hover: none) and (pointer: coarse) and (max-width: 768px)').matches;
-    const prefersHover = window.matchMedia('(hover: hover)').matches;
-    const isMobile = !prefersHover;
-
-
+    // Feature detection
+    const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     let tappedOnce = false;
 
     if (isMobile) {
       card.addEventListener('click', (e) => {
         e.stopPropagation();
+
         if (!tappedOnce) {
           card.classList.add('flipped');
           tappedOnce = true;
@@ -194,7 +189,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
           setTimeout(() => {
             const cat = card.closest('.card-stack')?.id.replace('-stack', '');
             shuffleCard(cat);
-          }, 300); // Wait for unflip animation to finish
+          }, 300); // match flip animation
         }
       });
     } else {
@@ -207,8 +202,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       });
     }
 
-    // Ensures card is cleanly unflipped immediately when created
-    card.classList.remove('flipped');
+    // Always reset flipped state
     setTimeout(() => {
       card.classList.remove('flipped');
     }, 0);
@@ -216,6 +210,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
 
   return card;
 }
+
 
 
 
