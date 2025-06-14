@@ -1,3 +1,5 @@
+/* ...your existing styles... */
+
 body {
   margin: 0;
   padding: 30px;
@@ -18,10 +20,12 @@ h1 {
   margin-bottom: 20px;
   color: white;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 0 10px;
 }
 
 #modeToggle {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   padding: 8px 16px;
   font-size: 1rem;
   background-color: white;
@@ -31,15 +35,24 @@ h1 {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+#flipHint {
+  margin-top: -10px;
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+  color: white;
+  opacity: 0.85;
+  text-align: center;
+  padding: 0 10px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 .decks-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px 60px; /* vertical gap, then horizontal gap */
+  gap: 40px 60px;
   justify-content: center;
   padding: 20px;
 }
-
-
 
 .deck {
   display: flex;
@@ -53,6 +66,11 @@ h1 {
   font-weight: bold;
   color: white;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90vw;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
 }
 
 .card-stack {
@@ -74,7 +92,6 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
 }
 
 .card-inner {
@@ -140,10 +157,14 @@ h1 {
   text-align: center;
 }
 
-
-
 /* Responsive for mobile */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .decks-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 10px;
+  }
+
   .card-stack {
     width: 90vw;
     height: 140vw;
@@ -155,6 +176,13 @@ h1 {
 
   .card-content {
     font-size: 0.9rem;
+  }
+
+  .deck-label {
+    font-size: 1rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
   }
 }
 
@@ -194,13 +222,4 @@ h1 {
 .card.quiz-wiggle {
   animation: quizWiggle 3s ease-in-out infinite;
   will-change: transform;
-}
-
-#flipHint {
-  margin-top: -20px;
-  margin-bottom: 30px;
-  font-size: 0.95rem;
-  color: white;
-  opacity: 0.85;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
