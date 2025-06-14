@@ -193,24 +193,31 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
         }
       });
     } else {
-      card.addEventListener('mouseenter', () => card.classList.add('flipped'));
-      card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+      // Desktop hover flip
+      card.addEventListener('mouseenter', () => {
+        if (!card.classList.contains('flipped')) {
+          card.classList.add('flipped');
+        }
+      });
 
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('flipped');
+      });
+
+      // Desktop single click to advance
       card.addEventListener('click', (e) => {
         e.stopPropagation();
 
-        // Force unflip first
+        // Force unflip and then advance after short delay
         card.classList.remove('flipped');
 
-        // Then wait briefly before shuffling to next card
         setTimeout(() => {
           const cat = card.closest('.card-stack')?.id.replace('-stack', '');
           shuffleCard(cat);
-        }, 300);
+        }, 150); // slightly shorter for smoother effect
       });
     }
 
-    // Make sure each card starts unflipped
     setTimeout(() => {
       card.classList.remove('flipped');
     }, 0);
@@ -218,6 +225,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
 
   return card;
 }
+
 
 
 function renderDeck(category) {
