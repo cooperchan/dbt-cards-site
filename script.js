@@ -1,10 +1,20 @@
 // Mode toggle logic
 let currentMode = 'study';
 
+const flippedStates = {
+  emotion: false,
+  distress: false,
+  interpersonal: false,
+  mindfulness: false
+};
+
 document.getElementById('modeToggle').addEventListener('click', () => {
   currentMode = currentMode === 'quiz' ? 'study' : 'quiz';
   document.getElementById('modeToggle').textContent = `Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}`;
-  Object.keys(cardsByCategory).forEach(renderDeck);
+  Object.keys(cardsByCategory).forEach(category => {
+    flippedStates[category] = false;
+    renderDeck(category);
+  });
 });
 
 // Card structure
@@ -174,27 +184,14 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       card.classList.add('quiz-wiggle');
     }
 
-    let flipped = false;
-    const handleFlipThenAdvance = () => {
-      card.classList.add('flipped');
-      flipped = true;
-      setTimeout(() => {
-        const stack = card.closest('.deck');
-        const category = stack?.id?.replace('-stack', '');
-        flipped = false;
-        shuffleCard(category);
-      }, 1000);
-    };
-
     if (isMobile) {
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (!flipped) {
+        if (!flippedStates[category]) {
           card.classList.add('flipped');
-          flipped = true;
+          flippedStates[category] = true;
         } else {
-          const category = card.closest('.deck').id.replace('-stack', '');
-          flipped = false;
+          flippedStates[category] = false;
           shuffleCard(category);
         }
       });
@@ -203,12 +200,9 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        const category = card.closest('.deck').id.replace('-stack', '');
         shuffleCard(category);
       });
     }
-
-    card.classList.remove('flipped');
   }
 
   return card;
@@ -238,6 +232,7 @@ function renderDeck(category) {
 }
 
 function shuffleCard(category) {
+  flippedStates[category] = false;
   currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
   renderDeck(category);
 }
