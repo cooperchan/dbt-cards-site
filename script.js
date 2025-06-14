@@ -123,7 +123,6 @@ const cardsByCategory = {
   ]
 };
 
-// Index tracker
 const currentIndices = {
   emotion: 0,
   distress: 0,
@@ -175,14 +174,26 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       card.classList.add('quiz-wiggle');
     }
 
+    let flipped = false;
+    const handleFlipThenAdvance = () => {
+      card.classList.add('flipped');
+      flipped = true;
+      setTimeout(() => {
+        const stack = card.closest('.deck');
+        const category = stack?.id?.replace('-stack', '');
+        flipped = false;
+        shuffleCard(category);
+      }, 1000);
+    };
+
     if (isMobile) {
-      let flipped = false;
       card.addEventListener('click', (e) => {
         e.stopPropagation();
         if (!flipped) {
           card.classList.add('flipped');
           flipped = true;
         } else {
+          const category = card.closest('.deck').id.replace('-stack', '');
           flipped = false;
           shuffleCard(category);
         }
@@ -192,11 +203,11 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
       card.addEventListener('click', (e) => {
         e.stopPropagation();
+        const category = card.closest('.deck').id.replace('-stack', '');
         shuffleCard(category);
       });
     }
 
-    // Ensure top card starts unflipped
     card.classList.remove('flipped');
   }
 
