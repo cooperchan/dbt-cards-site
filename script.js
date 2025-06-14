@@ -238,3 +238,4 @@ function generateStackedCardContent(iconPath, titleText) {
 window.onload = () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
 };
+xzxxxxxx
