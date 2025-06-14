@@ -191,22 +191,29 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
           card.classList.add('flipped');
           flippedStates[category] = true;
         } else {
+          // Once flipped, advance to next card's front
           flippedStates[category] = false;
           shuffleCard(category);
         }
       });
     } else {
-      card.addEventListener('mouseenter', () => card.classList.add('flipped'));
-      card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+      card.addEventListener('mouseenter', () => card.classList.add('flipped')); // Hover to flip
+      card.addEventListener('mouseleave', () => card.classList.remove('flipped')); // Hover out to unflip
+
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        shuffleCard(category);
+        if (card.classList.contains('flipped')) {
+          // If flipped, advance to next card's front
+          flippedStates[category] = false;
+          shuffleCard(category);
+        }
       });
     }
   }
 
   return card;
 }
+
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
