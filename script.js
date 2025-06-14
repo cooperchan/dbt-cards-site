@@ -199,14 +199,20 @@ if (layerIndex === 0) {
       }
     });
   } else {
-    card.addEventListener('mouseenter', () => card.classList.add('flipped'));
-    card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
-    card.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-      //console.log("🖱 Desktop click: shuffle", cat);
-      shuffleCard(cat);
-    });
+card.addEventListener('mouseenter', () => card.classList.add('flipped'));
+card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+
+card.addEventListener('click', (e) => {
+  e.stopPropagation();
+  card.classList.remove('flipped'); // Immediately unflip
+
+  // Wait for unflip before advancing to next front-facing card
+  setTimeout(() => {
+    const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+    shuffleCard(cat);
+  }, 300); // matches flip transition
+});
+
   }
 
   // Ensures each new card starts unflipped
