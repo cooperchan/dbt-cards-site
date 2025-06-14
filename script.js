@@ -175,15 +175,19 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (isMobile) {
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (!flipped) {
-          card.classList.add('flipped');
-          flipped = true;
-        } else {
-          flipped = false;
-          card.classList.remove('flipped');
-          const cat = card.closest('.deck').id.replace('-stack', '');
-          shuffleCard(cat);
-        }
+if (!flipped) {
+  card.classList.add('flipped');
+  flipped = true;
+} else {
+  const cat = card.closest('.deck').id.replace('-stack', '');
+  card.classList.remove('flipped');
+  flipped = false;
+  // Wait until flip back animation is done before moving to next card
+  setTimeout(() => {
+    shuffleCard(cat);
+  }, 300); // Matches your flip transition duration (0.6s) / 2
+}
+
       });
     } else {
       card.addEventListener('mouseenter', () => card.classList.add('flipped'));
