@@ -1,21 +1,7 @@
 // Mode toggle logic
 let currentMode = 'study';
 
-const flippedStates = {
-  emotion: false,
-  distress: false,
-  interpersonal: false,
-  mindfulness: false
-};
-
-document.getElementById('modeToggle').addEventListener('click', () => {
-  currentMode = currentMode === 'quiz' ? 'study' : 'quiz';
-  document.getElementById('modeToggle').textContent = `Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}`;
-  Object.keys(cardsByCategory).forEach(category => {
-    flippedStates[category] = false;
-    renderDeck(category);
-  });
-});
+const isMobile = window.matchMedia('(hover: none)').matches;
 
 // Card structure
 const cardsByCategory = {
@@ -140,6 +126,12 @@ const currentIndices = {
   mindfulness: 0
 };
 
+document.getElementById('modeToggle').addEventListener('click', () => {
+  currentMode = currentMode === 'quiz' ? 'study' : 'quiz';
+  document.getElementById('modeToggle').textContent = `Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}`;
+  Object.keys(cardsByCategory).forEach(renderDeck);
+});
+
 function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
   const card = document.createElement('div');
   card.classList.add('card');
@@ -176,54 +168,40 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   card.appendChild(inner);
 
   if (layerIndex === 0) {
-    const isMobile = window.matchMedia('(hover: none)').matches;
+    if (currentMode === 'study') card.classList.add('float');
+    else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-    if (currentMode === 'study') {
-      card.classList.add('float');
-    } else if (currentMode === 'quiz') {
-      card.classList.add('quiz-wiggle');
-    }
+    let flipped = false;
+
+    const flipCard = () => {
+      card.classList.add('flipped');
+      flipped = true;
+    };
+
+    const unflipAndAdvance = () => {
+      card.classList.remove('flipped');
+      flipped = false;
+      shuffleCard(category);
+    };
 
     if (isMobile) {
-      // Mobile behavior: Tap to flip, tap again to shuffle (go to next card)
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-
-        // If not flipped, flip it
-        if (!flippedStates[category]) {
-          card.classList.add('flipped');
-          flippedStates[category] = true;
-        } else {
-          // If already flipped, shuffle the deck (go to next card)
-          flippedStates[category] = false;
-          shuffleCard(category);
-        }
+        if (!flipped) flipCard();
+        else unflipAndAdvance();
       });
     } else {
-      // Desktop behavior: Hover to flip, click to go to next card
-      card.addEventListener('mouseenter', () => {
-        card.classList.add('flipped');
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.classList.remove('flipped');
-      });
-
+      card.addEventListener('mouseenter', () => flipCard());
+      card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        // Only shuffle the deck if the card is flipped
-        if (card.classList.contains('flipped')) {
-          flippedStates[category] = false;
-          shuffleCard(category);
-        }
+        unflipAndAdvance();
       });
     }
   }
 
   return card;
 }
-
-
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
@@ -249,7 +227,6 @@ function renderDeck(category) {
 }
 
 function shuffleCard(category) {
-  flippedStates[category] = false;
   currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
   renderDeck(category);
 }
