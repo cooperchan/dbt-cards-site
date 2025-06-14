@@ -133,6 +133,8 @@ const currentIndices = {
   mindfulness: 0
 };
 
+let tappedOnce = false;
+
 function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
   const card = document.createElement('div');
   card.classList.add('card');
@@ -173,9 +175,9 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
     const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    let tappedOnce = false;
-
+    
     if (isMobile) {
+      // Mobile handling (tap once to flip, tap twice to advance)
       card.addEventListener('click', (e) => {
         e.stopPropagation();
 
@@ -183,6 +185,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
           card.classList.add('flipped');
           tappedOnce = true;
         } else {
+          // Remove flip and move to next card
           card.classList.remove('flipped');
           tappedOnce = false;
 
@@ -193,7 +196,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
         }
       });
     } else {
-      // Desktop hover flip
+      // Desktop: Hover to flip, single click to advance
       card.addEventListener('mouseenter', () => {
         if (!card.classList.contains('flipped')) {
           card.classList.add('flipped');
@@ -204,26 +207,29 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
         card.classList.remove('flipped');
       });
 
-// Desktop single click to advance
-card.addEventListener('click', (e) => {
-  e.stopPropagation();
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
 
-  const stack = card.closest('.card-stack');
-  const cat = stack?.id.replace('-stack', '');
+        const stack = card.closest('.card-stack');
+        const cat = stack?.id.replace('-stack', '');
 
-  // Add blocker to prevent new card from auto-flipping on hover
-  stack.classList.add('disable-hover');
+        // Add blocker to prevent new card from auto-flipping on hover
+        stack.classList.add('disable-hover');
 
-  // Advance card immediately
-  shuffleCard(cat);
+        // Check if card is already flipped or not
+        if (card.classList.contains('flipped')) {
+          // Advance card immediately
+          shuffleCard(cat);
+        } else {
+          // Flip the card
+          card.classList.add('flipped');
+        }
 
-  // Remove blocker after a short pause so hover can work again
-  setTimeout(() => {
-    stack.classList.remove('disable-hover');
-  }, 300); // Adjust if needed
-});
-
-
+        // Remove blocker after a short pause so hover can work again
+        setTimeout(() => {
+          stack.classList.remove('disable-hover');
+        }, 300); // Adjust if needed
+      });
     }
 
     setTimeout(() => {
