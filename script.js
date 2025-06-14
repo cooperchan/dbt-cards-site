@@ -183,11 +183,19 @@ if (layerIndex === 0) {
     card.classList.add('quiz-wiggle');
   }
 
-  setTimeout(() => {
-    card.addEventListener('mouseenter', () => card.classList.add('flipped'));
-    card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
-  }, 300);
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (card.classList.contains('flipped')) {
+      // Move to next card if already flipped
+      const category = card.closest('.deck').id.replace('-stack', '');
+      shuffleCard(category);
+    } else {
+      // Flip card
+      card.classList.add('flipped');
+    }
+  });
 }
+
 
 
 
