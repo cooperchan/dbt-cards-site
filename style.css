@@ -106,9 +106,9 @@ h1 {
   will-change: transform;
 }
 
-.card.flipped .card-inner {
+/*.card.flipped .card-inner {
   transform: rotateY(180deg);
-}
+}*/
 
 .card-face {
   position: absolute;
