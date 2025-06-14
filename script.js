@@ -169,28 +169,31 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (currentMode === 'study') card.classList.add('float');
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-const isMobile = window.matchMedia('(hover: none)').matches;
+    const isMobile = window.matchMedia('(hover: none)').matches;
+    let flipped = false;
 
-if (isMobile) {
-  card.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (!card.classList.contains('flipped')) {
-      card.classList.add('flipped');
+    if (isMobile) {
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!flipped) {
+          card.classList.add('flipped');
+          flipped = true;
+        } else {
+          flipped = false;
+          card.classList.remove('flipped');
+          const cat = card.closest('.deck').id.replace('-stack', '');
+          shuffleCard(cat);
+        }
+      });
     } else {
-      const cat = card.closest('.deck').id.replace('-stack', '');
-      shuffleCard(cat);
+      card.addEventListener('mouseenter', () => card.classList.add('flipped'));
+      card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cat = card.closest('.deck').id.replace('-stack', '');
+        shuffleCard(cat);
+      });
     }
-  });
-} else {
-  card.addEventListener('mouseenter', () => card.classList.add('flipped'));
-  card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
-  card.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const cat = card.closest('.deck').id.replace('-stack', '');
-    shuffleCard(cat);
-  });
-}
-
   }
 
   return card;
