@@ -178,19 +178,22 @@ if (isMobile) {
   card.addEventListener('click', (e) => {
     e.stopPropagation();
 
-    if (!hasFlipped) {
-      card.classList.add('flipped');
-      hasFlipped = true;
-    } else {
-      card.classList.remove('flipped');
-      hasFlipped = false;
+if (!hasFlipped) {
+  console.log("🔄 Flipping card");
+  card.classList.add('flipped');
+  hasFlipped = true;
+} else {
+  console.log("⏭ Advancing to next card");
+  card.classList.remove('flipped');
+  hasFlipped = false;
 
-      // Delay shuffle slightly so the flip-back animation plays
-      setTimeout(() => {
-        const cat = card.closest('.card-stack').id.replace('-stack', '');
-        shuffleCard(cat);
-      }, 300); // Adjust delay as needed to match flip CSS duration
-    }
+  setTimeout(() => {
+    const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+    console.log("🔁 Shuffling card for category:", cat);
+    shuffleCard(cat);
+  }, 300);
+}
+
   });
 }
  else {
