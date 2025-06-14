@@ -176,28 +176,31 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0) {
   inner.appendChild(back);
   card.appendChild(inner);
 
-if (layerIndex === 0) {
-  if (currentMode === 'study') {
-    card.classList.add('float');
-  } else if (currentMode === 'quiz') {
-    card.classList.add('quiz-wiggle');
-  }
-
-  card.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (card.classList.contains('flipped')) {
-      // Move to next card if already flipped
-      const category = card.closest('.deck').id.replace('-stack', '');
-      shuffleCard(category);
-    } else {
-      // Flip card
-      card.classList.add('flipped');
+  if (layerIndex === 0) {
+    if (currentMode === 'study') {
+      card.classList.add('float');
+    } else if (currentMode === 'quiz') {
+      card.classList.add('quiz-wiggle');
     }
-  });
-}
 
+    // Flip on hover (desktop)
+    card.addEventListener('mouseenter', () => card.classList.add('flipped'));
+    card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
 
-
+    // Flip on tap (mobile)
+    let tapped = false;
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (card.classList.contains('flipped')) {
+        // Already flipped: go to next
+        const category = card.closest('.deck').id.replace('-stack', '');
+        shuffleCard(category);
+      } else {
+        // First tap flips
+        card.classList.add('flipped');
+      }
+    });
+  }
 
   return card;
 }
