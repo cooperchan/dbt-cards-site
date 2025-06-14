@@ -133,8 +133,6 @@ const currentIndices = {
   mindfulness: 0
 };
 
-let tappedOnce = false;
-
 function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
   const card = document.createElement('div');
   card.classList.add('card');
@@ -170,77 +168,56 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   inner.appendChild(back);
   card.appendChild(inner);
 
-  if (layerIndex === 0) {
-    if (currentMode === 'study') card.classList.add('float');
-    else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
+if (layerIndex === 0) {
+  if (currentMode === 'study') card.classList.add('float');
+  else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    
-    if (isMobile) {
-      // Mobile handling (tap once to flip, tap twice to advance)
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
+  // Mobile detection
+  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  let tappedOnce = false;
 
-        if (!tappedOnce) {
-          card.classList.add('flipped');
-          tappedOnce = true;
-        } else {
-          // Remove flip and move to next card
-          card.classList.remove('flipped');
-          tappedOnce = false;
+  if (isMobile) {
+    //console.log("📱 Real mobile detected");
 
-          setTimeout(() => {
-            const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-            shuffleCard(cat);
-          }, 300);
-        }
-      });
-    } else {
-      // Desktop: Hover to flip, single click to advance
-      card.addEventListener('mouseenter', () => {
-        if (!card.classList.contains('flipped')) {
-          card.classList.add('flipped');
-        }
-      });
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
 
-      card.addEventListener('mouseleave', () => {
+      if (!tappedOnce) {
+        //console.log("🔄 Tap 1: flip card");
+        card.classList.add('flipped');
+        tappedOnce = true;
+      } else {
+        //console.log("⏭ Tap 2: unflip and advance");
         card.classList.remove('flipped');
-      });
+        tappedOnce = false;
 
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
-
-        const stack = card.closest('.card-stack');
-        const cat = stack?.id.replace('-stack', '');
-
-        // Add blocker to prevent new card from auto-flipping on hover
-        stack.classList.add('disable-hover');
-
-        // Check if card is already flipped or not
-        if (card.classList.contains('flipped')) {
-          // Advance card immediately
-          shuffleCard(cat);
-        } else {
-          // Flip the card
-          card.classList.add('flipped');
-        }
-
-        // Remove blocker after a short pause so hover can work again
         setTimeout(() => {
-          stack.classList.remove('disable-hover');
-        }, 300); // Adjust if needed
-      });
-    }
-
-    setTimeout(() => {
-      card.classList.remove('flipped');
-    }, 0);
+          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+          //console.log("🔁 Shuffling card for:", cat);
+          shuffleCard(cat);
+        }, 300); // matches flip animation
+      }
+    });
+  } else {
+    card.addEventListener('mouseenter', () => card.classList.add('flipped'));
+    card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+      //console.log("🖱 Desktop click: shuffle", cat);
+      shuffleCard(cat);
+    });
   }
 
-  return card;
+  // Ensures each new card starts unflipped
+  setTimeout(() => {
+    card.classList.remove('flipped');
+  }, 0);
 }
 
 
+  return card;
+}
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);

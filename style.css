@@ -106,9 +106,9 @@ h1 {
   will-change: transform;
 }
 
-/*.card.flipped .card-inner {
+.card.flipped .card-inner {
   transform: rotateY(180deg);
-}*/
+}
 
 .card-face {
   position: absolute;
@@ -226,15 +226,3 @@ h1 {
   animation: quizWiggle 3s ease-in-out infinite;
   will-change: transform;
 }
-
-@media (hover: hover) and (pointer: fine) {
-  .card:hover .card-inner {
-    transform: rotateY(180deg);
-  }
-}
-
-/* Block hover flip when disable-hover is present */
-.disable-hover .card:hover .card-inner {
-  transform: none !important;
-}
-
