@@ -199,19 +199,19 @@ if (layerIndex === 0) {
       }
     });
   } else {
-card.addEventListener('mouseenter', () => card.classList.add('flipped'));
-card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
-
 card.addEventListener('click', (e) => {
   e.stopPropagation();
-  card.classList.remove('flipped'); // Immediately unflip
 
-  // Wait for unflip before advancing to next front-facing card
+  // Temporarily disable hover-to-flip so card is unflipped before shuffling
+  card.classList.remove('flipped');
+
+  // Wait a moment to let the unflip finish before advancing
   setTimeout(() => {
     const cat = card.closest('.card-stack')?.id.replace('-stack', '');
     shuffleCard(cat);
-  }, 300); // matches flip transition
+  }, 300); // Matches .6s flip duration (half flip)
 });
+
 
   }
 
