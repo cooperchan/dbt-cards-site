@@ -181,7 +181,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
         } else {
           flipped = false;
           card.classList.remove('flipped');
-          const cat = card.closest('.deck').id.replace('-stack', '');
+          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
           shuffleCard(cat);
         }
       });
@@ -190,10 +190,15 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        const cat = card.closest('.deck').id.replace('-stack', '');
+        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+        //console.log("CLICK → cat:", cat);
         shuffleCard(cat);
       });
     }
+      setTimeout(() => {
+  card.classList.remove('flipped'); // forcibly reset flip state after DOM render
+}, 0);
+
   }
 
   return card;
