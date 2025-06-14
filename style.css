@@ -165,21 +165,20 @@ h1 {
 @media (max-width: 768px) {
   .decks-container {
     grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 10px;
+    gap: 24px;
+    padding: 12px;
     width: 100%;
   }
 
   .card-stack {
-    width: 85vw;
-    max-width: 320px;
+    width: 100%;
+    max-width: 290px; /* <- hard pixel cap that fits all mobile screens */
     height: auto;
     margin: 0 auto;
   }
 
   .card {
     width: 100%;
-    max-width: 100%;
   }
 
   .deck-label {
@@ -190,10 +189,11 @@ h1 {
   }
 
   body {
-    padding: 10px;
+    padding: 12px;
     overflow-x: hidden;
   }
 }
+
 
 
 
