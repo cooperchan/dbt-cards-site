@@ -175,7 +175,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
     //const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const isMobile = window.matchMedia('(hover: none)').matches;
+    const isMobile = window.matchMedia('(hover: none) and (pointer: coarse) and (max-width: 768px)').matches;
 
     let tappedOnce = false;
 
