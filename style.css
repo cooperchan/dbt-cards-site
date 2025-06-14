@@ -232,3 +232,9 @@ h1 {
     transform: rotateY(180deg);
   }
 }
+
+/* Block hover flip when disable-hover is present */
+.disable-hover .card:hover .card-inner {
+  transform: none !important;
+}
+

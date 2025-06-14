@@ -204,18 +204,23 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
         card.classList.remove('flipped');
       });
 
-      // Desktop single click to advance
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
+card.addEventListener('click', (e) => {
+  e.stopPropagation();
 
-        // Force unflip and then advance after short delay
-        card.classList.remove('flipped');
+  // Temporarily disable hover by adding a blocker class to the stack
+  const stack = card.closest('.card-stack');
+  stack.classList.add('disable-hover');
 
-        setTimeout(() => {
-          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-          shuffleCard(cat);
-        }, 150); // slightly shorter for smoother effect
-      });
+  // Advance immediately
+  const cat = stack.id.replace('-stack', '');
+  shuffleCard(cat);
+
+  // Remove hover block shortly after to allow normal behavior
+  setTimeout(() => {
+    stack.classList.remove('disable-hover');
+  }, 200); // Give it a moment to settle
+});
+
     }
 
     setTimeout(() => {
