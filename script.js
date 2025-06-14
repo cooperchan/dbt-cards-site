@@ -130,7 +130,7 @@ const currentIndices = {
   mindfulness: 0
 };
 
-function createCardElement(frontText, backText, title = '', layerIndex = 0, category) {
+function createCardElement(frontText, backText, title = '', layerIndex = 0) {
   const card = document.createElement('div');
   card.classList.add('card');
   card.style.setProperty('--i', layerIndex);
@@ -146,6 +146,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   frontTitle.innerHTML = currentMode === 'quiz'
     ? `<i class="fas fa-brain"></i> ${title}`
     : title;
+
   const frontContent = document.createElement('div');
   frontContent.classList.add('card-content');
   frontContent.innerHTML = frontText;
@@ -165,6 +166,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   backTitle.innerHTML = currentMode === 'quiz'
     ? `<i class="fas fa-lightbulb"></i> Answer`
     : `Definition`;
+
   const backContent = document.createElement('div');
   backContent.classList.add('card-content');
   backContent.innerHTML = backText;
@@ -177,38 +179,47 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   card.appendChild(inner);
 
   if (layerIndex === 0) {
+    const isMobile = window.matchMedia('(hover: none)').matches;
+
     if (currentMode === 'study') {
       card.classList.add('float');
     } else if (currentMode === 'quiz') {
       card.classList.add('quiz-wiggle');
     }
 
-    let flipped = false;
-    const flipCard = () => {
-      if (!flipped) {
-        card.classList.add('flipped');
-        flipped = true;
-      } else {
-        currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
-        renderDeck(category);
-      }
-    };
-
-    const isTouch = matchMedia('(hover: none)').matches;
-    if (isTouch) {
-      card.addEventListener('click', flipCard);
+    if (isMobile) {
+      // Mobile: tap to flip, tap again to shuffle
+      let flipped = false;
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!flipped) {
+          card.classList.add('flipped');
+          flipped = true;
+        } else {
+          const category = card.closest('.deck').id.replace('-stack', '');
+          flipped = false;
+          shuffleCard(category);
+        }
+      });
     } else {
+      // Desktop: hover to flip, click to shuffle
       card.addEventListener('mouseenter', () => card.classList.add('flipped'));
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
-      card.addEventListener('click', () => {
-        currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
-        renderDeck(category);
+
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const category = card.closest('.deck').id.replace('-stack', '');
+        shuffleCard(category);
       });
     }
+
+    // Make sure the new top card starts unflipped
+    card.classList.remove('flipped');
   }
 
   return card;
 }
+
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
