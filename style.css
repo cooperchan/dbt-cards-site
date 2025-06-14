@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   margin: 0;
@@ -158,17 +163,35 @@ h1 {
 
 /* Responsive for mobile */
 @media (max-width: 768px) {
+  body {
+    padding: 10px;
+    overflow-x: hidden;
+  }
+
   .decks-container {
     grid-template-columns: 1fr;
     gap: 30px;
     padding: 10px;
+    width: 100%;
   }
 
   .card-stack {
-    width: 94vw;
-    max-width: 330px;
-    height: auto;
+    width: 90vw;
+    max-width: 360px;
     margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .deck-label {
+    font-size: 1rem;
+    white-space: normal;
+    text-align: center;
+    padding: 0 8px;
   }
 
   .card-title {
@@ -178,21 +201,8 @@ h1 {
   .card-content {
     font-size: 0.9rem;
   }
-
-  .deck-label {
-    font-size: 1rem;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: initial;
-    text-align: center;
-    padding: 0 8px;
-  }
-
-  body {
-    padding: 10px;
-    overflow-x: hidden;
-  }
 }
+
 
 
 .study-layout {
