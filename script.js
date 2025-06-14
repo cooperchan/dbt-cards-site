@@ -192,18 +192,24 @@ if (isMobile) {
 
       setTimeout(() => {
         const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-        shuffleCard(cat);
+        shuffleCard(cat);  // Advance to next card
       }, 300); // matches flip animation time
     }
   });
 } else {
-  // Desktop behavior (only handle click to advance, hover will flip the card)
+  // Desktop behavior (single click to advance, hover flips the card)
   card.addEventListener('click', (e) => {
     e.stopPropagation();
+
+    // Ensure the card is unflipped before advancing to the next card
+    card.classList.remove('flipped');
+
+    // Advance to the next card on single click
     const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-    shuffleCard(cat);
+    shuffleCard(cat);  
   });
 }
+
 
 
   // Ensures each new card starts unflipped
@@ -238,6 +244,7 @@ function renderDeck(category) {
     stack.appendChild(card);
   });
 }
+
 
 function shuffleCard(category) {
   currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
