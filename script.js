@@ -177,7 +177,7 @@ const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 let tappedOnce = false;
 
 if (isMobile) {
-  // Mobile behavior (tap to flip and advance)
+  // Mobile behavior: Tap to flip and advance
   card.addEventListener('click', (e) => {
     e.stopPropagation();
 
@@ -197,18 +197,19 @@ if (isMobile) {
     }
   });
 } else {
-  // Desktop behavior (single click to advance, hover flips the card)
+  // Desktop behavior: Hover flips, single click advances
   card.addEventListener('click', (e) => {
     e.stopPropagation();
 
-    // Ensure the card is unflipped before advancing to the next card
+    // Remove flipped class before advancing to the next card (ensures front of the next card is shown)
     card.classList.remove('flipped');
 
-    // Advance to the next card on single click
+    // Now advance to the next card
     const cat = card.closest('.card-stack')?.id.replace('-stack', '');
     shuffleCard(cat);  
   });
 }
+
 
 
 
@@ -244,6 +245,7 @@ function renderDeck(category) {
     stack.appendChild(card);
   });
 }
+
 
 
 function shuffleCard(category) {
