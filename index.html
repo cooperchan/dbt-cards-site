@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DBT Flashcard Decks</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>DBT Flashcard Decks</h1>
+
+  <button id="modeToggle">Mode: Study</button>
+
+  <p id="flipHint">(Tap or Swipe to Flip)</p>
+
+
+  <div class="decks-container">
+    <div class="deck" onclick="shuffleCard('emotion')">
+      <div class="deck-label">Emotion Regulation</div>
+      <div class="card-stack" id="emotion-stack"></div>
+    </div>
+
+        <div class="deck" onclick="shuffleCard('distress')">
+      <div class="deck-label">Distress Tolerance</div>
+      <div class="card-stack" id="distress-stack"></div>
+    </div>
+
+    <div class="deck" onclick="shuffleCard('interpersonal')">
+      <div class="deck-label">Interpersonal Effectiveness</div>
+      <div class="card-stack" id="interpersonal-stack"></div>
+    </div>
+
+        <div class="deck" onclick="shuffleCard('mindfulness')">
+      <div class="deck-label">Mindfulness</div>
+      <div class="card-stack" id="mindfulness-stack"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

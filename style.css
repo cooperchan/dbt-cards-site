@@ -1,0 +1,206 @@
+body {
+  margin: 0;
+  padding: 30px;
+  font-family: 'League Spartan', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#modeToggle {
+  margin-bottom: 30px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.decks-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 60px; /* vertical gap, then horizontal gap */
+  justify-content: center;
+  padding: 20px;
+}
+
+
+
+.deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.deck-label {
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+.card-stack {
+  position: relative;
+  width: 320px;
+  height: 500px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(calc(var(--i, 0) * 4px)) scale(calc(1 - var(--i, 0) * 0.02));
+  z-index: calc(10 - var(--i, 0));
+  opacity: calc(1 - var(--i, 0) * 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  will-change: transform;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 1rem;
+  overflow-y: auto;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-size: 2rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .card-stack {
+    width: 90vw;
+    height: 140vw;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-content {
+    font-size: 0.9rem;
+  }
+}
+
+.study-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.study-layout img {
+  height: 120px !important;
+  width: auto !important;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+@keyframes float {
+  0%   { transform: translateY(calc(var(--i, 0) * 4px)) scale(calc(1 - var(--i, 0) * 0.02)); }
+  50%  { transform: translateY(calc(var(--i, 0) * 2px + -6px)) scale(calc(1 - var(--i, 0) * 0.02)); }
+  100% { transform: translateY(calc(var(--i, 0) * 4px)) scale(calc(1 - var(--i, 0) * 0.02)); }
+}
+
+.card.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes quizWiggle {
+  0%   { transform: rotateZ(0deg); }
+  25%  { transform: rotateZ(0.5deg); }
+  75%  { transform: rotateZ(-0.5deg); }
+  100% { transform: rotateZ(0deg); }
+}
+
+.card.quiz-wiggle {
+  animation: quizWiggle 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+#flipHint {
+  margin-top: -20px;
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+  color: white;
+  opacity: 0.85;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
