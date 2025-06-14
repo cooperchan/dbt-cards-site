@@ -123,6 +123,7 @@ const cardsByCategory = {
   ]
 };
 
+// Index tracker
 const currentIndices = {
   emotion: 0,
   distress: 0,
@@ -130,7 +131,7 @@ const currentIndices = {
   mindfulness: 0
 };
 
-function createCardElement(frontText, backText, title = '', layerIndex = 0) {
+function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
   const card = document.createElement('div');
   card.classList.add('card');
   card.style.setProperty('--i', layerIndex);
@@ -140,37 +141,24 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0) {
 
   const front = document.createElement('div');
   front.classList.add('card-face', 'card-front');
-
   const frontTitle = document.createElement('div');
   frontTitle.classList.add('card-title');
-  frontTitle.innerHTML = currentMode === 'quiz'
-    ? `<i class="fas fa-brain"></i> ${title}`
-    : title;
-
+  frontTitle.innerHTML = currentMode === 'quiz' ? `<i class="fas fa-brain"></i> ${title}` : title;
   const frontContent = document.createElement('div');
   frontContent.classList.add('card-content');
   frontContent.innerHTML = frontText;
-
-  if (currentMode === 'study') {
-    frontContent.classList.add('study-layout');
-  }
-
+  if (currentMode === 'study') frontContent.classList.add('study-layout');
   front.appendChild(frontTitle);
   front.appendChild(frontContent);
 
   const back = document.createElement('div');
   back.classList.add('card-face', 'card-back');
-
   const backTitle = document.createElement('div');
   backTitle.classList.add('card-title');
-  backTitle.innerHTML = currentMode === 'quiz'
-    ? `<i class="fas fa-lightbulb"></i> Answer`
-    : `Definition`;
-
+  backTitle.innerHTML = currentMode === 'quiz' ? `<i class="fas fa-lightbulb"></i> Answer` : `Definition`;
   const backContent = document.createElement('div');
   backContent.classList.add('card-content');
   backContent.innerHTML = backText;
-
   back.appendChild(backTitle);
   back.appendChild(backContent);
 
@@ -188,7 +176,6 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0) {
     }
 
     if (isMobile) {
-      // Mobile: tap to flip, tap again to shuffle
       let flipped = false;
       card.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -196,30 +183,25 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0) {
           card.classList.add('flipped');
           flipped = true;
         } else {
-          const category = card.closest('.deck').id.replace('-stack', '');
           flipped = false;
           shuffleCard(category);
         }
       });
     } else {
-      // Desktop: hover to flip, click to shuffle
       card.addEventListener('mouseenter', () => card.classList.add('flipped'));
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
-
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        const category = card.closest('.deck').id.replace('-stack', '');
         shuffleCard(category);
       });
     }
 
-    // Make sure the new top card starts unflipped
+    // Ensure top card starts unflipped
     card.classList.remove('flipped');
   }
 
   return card;
 }
-
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
@@ -242,6 +224,11 @@ function renderDeck(category) {
     const card = createCardElement(frontText, backText, title, index, category);
     stack.appendChild(card);
   });
+}
+
+function shuffleCard(category) {
+  currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
+  renderDeck(category);
 }
 
 function generateStackedCardContent(iconPath, titleText) {
