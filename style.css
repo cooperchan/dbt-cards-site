@@ -163,11 +163,6 @@ h1 {
 
 /* Responsive for mobile */
 @media (max-width: 768px) {
-  html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
   .decks-container {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -176,8 +171,8 @@ h1 {
   }
 
   .card-stack {
-    width: 100%;
-    max-width: 340px;
+    width: 85vw;
+    max-width: 320px;
     height: auto;
     margin: 0 auto;
   }
@@ -193,7 +188,13 @@ h1 {
     text-align: center;
     padding: 0 10px;
   }
+
+  body {
+    padding: 10px;
+    overflow-x: hidden;
+  }
 }
+
 
 
 .study-layout {
