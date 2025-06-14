@@ -187,7 +187,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
           setTimeout(() => {
             const cat = card.closest('.card-stack')?.id.replace('-stack', '');
             shuffleCard(cat);
-          }, 300); // Matches flip timing
+          }, 300); // Wait for unflip animation to finish
         }
       });
     } else {
@@ -195,19 +195,21 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        // Prevent lingering flip state before rendering next
-        card.classList.remove('flipped');
         const cat = card.closest('.card-stack')?.id.replace('-stack', '');
         shuffleCard(cat);
       });
     }
 
-    // Ensure card starts unflipped (prevent initial flicker)
+    // Ensures card is cleanly unflipped immediately when created
     card.classList.remove('flipped');
+    setTimeout(() => {
+      card.classList.remove('flipped');
+    }, 0);
   }
 
   return card;
 }
+
 
 
 
