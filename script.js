@@ -176,50 +176,50 @@ if (layerIndex === 0) {
 const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 let tappedOnce = false;
 
+// Mobile detection
+const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
 if (isMobile) {
-  // Mobile behavior: Tap to flip and advance
+  // For mobile/touch devices:
   card.addEventListener('click', (e) => {
     e.stopPropagation();
-
     if (!tappedOnce) {
       // Flip the card on first tap
       card.classList.add('flipped');
       tappedOnce = true;
     } else {
-      // Unflip and advance to the next card on second tap
+      // Unflip and advance on second tap
       card.classList.remove('flipped');
       tappedOnce = false;
-
+      
       setTimeout(() => {
         const cat = card.closest('.card-stack')?.id.replace('-stack', '');
         shuffleCard(cat);  // Advance to next card
-      }, 300); // matches flip animation time
+      }, 300); // Wait for flip animation before advancing
     }
   });
 } else {
-  // Desktop behavior: Hover flips, single click advances
+  // For desktop (non-touch devices):
   card.addEventListener('mouseenter', () => {
-    // Hover flips the card
+    // On hover, flip the card
     card.classList.add('flipped');
   });
   card.addEventListener('mouseleave', () => {
-    // On mouse leave, unflip the card
+    // On hover leave, unflip the card
     card.classList.remove('flipped');
   });
 
   card.addEventListener('click', (e) => {
     e.stopPropagation();
 
-    // REMOVE the 'flipped' class to show the front of the next card
+    // Ensure the card is unflipped before advancing
     card.classList.remove('flipped');
 
-    // Now advance to the next card on single click
+    // Now advance to the next card
     const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-    shuffleCard(cat);
+    shuffleCard(cat);  // Shuffle to next card
   });
 }
-
-
 
 
 
@@ -235,36 +235,41 @@ if (isMobile) {
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
-  stack.innerHTML = '';  // Clear previous cards
-  
-  const deck = cardsByCategory[category];
-  const current = currentIndices[category];  // Get the current index for this category
+  stack.innerHTML = ''; // Clear the current cards
 
+  const deck = cardsByCategory[category];
+  const current = currentIndices[category]; // Current index in the stack
+
+  // Determine which cards to show
   const cardIndices = [
     current,
     (current + 1) % deck.length,  // Wrap around to first card if we're at the last one
     (current + 2) % deck.length   // Wrap around as well
   ];
 
-  // Render the current, next, and second next card
+  // Create and render the cards
   cardIndices.forEach((i, index) => {
     const cardData = deck[i];
     const frontText = currentMode === 'quiz' ? cardData.quizFront : cardData.studyFront;
     const backText = currentMode === 'quiz' ? cardData.quizBack : cardData.studyBack;
     const title = currentMode === 'quiz' ? cardData.quizTitle : cardData.studyTitle || '';
     const card = createCardElement(frontText, backText, title, index, category);
-    stack.appendChild(card);  // Append to the stack (card container)
+    stack.appendChild(card);  // Add the card to the stack
   });
 }
 
 
 
 
+
 function shuffleCard(category) {
-  // Increment current index to show the next card
+  // Advance to the next card by incrementing the current index
   currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
-  renderDeck(category);  // Render the deck with the updated index
+
+  // Call renderDeck to update the stack
+  renderDeck(category);
 }
+
 
 
 function generateStackedCardContent(iconPath, titleText) {
