@@ -198,17 +198,27 @@ if (isMobile) {
   });
 } else {
   // Desktop behavior: Hover flips, single click advances
+  card.addEventListener('mouseenter', () => {
+    // Hover flips the card
+    card.classList.add('flipped');
+  });
+  card.addEventListener('mouseleave', () => {
+    // On mouse leave, unflip the card
+    card.classList.remove('flipped');
+  });
+
   card.addEventListener('click', (e) => {
     e.stopPropagation();
 
-    // Remove flipped class before advancing to the next card (ensures front of the next card is shown)
+    // REMOVE the 'flipped' class to show the front of the next card
     card.classList.remove('flipped');
 
-    // Now advance to the next card
+    // Now advance to the next card on single click
     const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-    shuffleCard(cat);  
+    shuffleCard(cat);
   });
 }
+
 
 
 
@@ -225,33 +235,37 @@ if (isMobile) {
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
-  stack.innerHTML = '';
-
+  stack.innerHTML = '';  // Clear previous cards
+  
   const deck = cardsByCategory[category];
-  const current = currentIndices[category];
+  const current = currentIndices[category];  // Get the current index for this category
 
   const cardIndices = [
     current,
-    (current + 1) % deck.length,
-    (current + 2) % deck.length
+    (current + 1) % deck.length,  // Wrap around to first card if we're at the last one
+    (current + 2) % deck.length   // Wrap around as well
   ];
 
+  // Render the current, next, and second next card
   cardIndices.forEach((i, index) => {
     const cardData = deck[i];
     const frontText = currentMode === 'quiz' ? cardData.quizFront : cardData.studyFront;
     const backText = currentMode === 'quiz' ? cardData.quizBack : cardData.studyBack;
     const title = currentMode === 'quiz' ? cardData.quizTitle : cardData.studyTitle || '';
     const card = createCardElement(frontText, backText, title, index, category);
-    stack.appendChild(card);
+    stack.appendChild(card);  // Append to the stack (card container)
   });
 }
 
 
 
+
 function shuffleCard(category) {
+  // Increment current index to show the next card
   currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
-  renderDeck(category);
+  renderDeck(category);  // Render the deck with the updated index
 }
+
 
 function generateStackedCardContent(iconPath, titleText) {
   return "<div style='display:flex; flex-direction:column; align-items:center; justify-content:center; max-height:100%; width:100%; box-sizing:border-box; gap:16px'>\
