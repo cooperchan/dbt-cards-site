@@ -1,7 +1,11 @@
 // Mode toggle logic
 let currentMode = 'study';
 
-const isMobile = window.matchMedia('(hover: none)').matches;
+document.getElementById('modeToggle').addEventListener('click', () => {
+  currentMode = currentMode === 'quiz' ? 'study' : 'quiz';
+  document.getElementById('modeToggle').textContent = `Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}`;
+  Object.keys(cardsByCategory).forEach(renderDeck);
+});
 
 // Card structure
 const cardsByCategory = {
@@ -126,13 +130,7 @@ const currentIndices = {
   mindfulness: 0
 };
 
-document.getElementById('modeToggle').addEventListener('click', () => {
-  currentMode = currentMode === 'quiz' ? 'study' : 'quiz';
-  document.getElementById('modeToggle').textContent = `Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}`;
-  Object.keys(cardsByCategory).forEach(renderDeck);
-});
-
-function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
+function createCardElement(frontText, backText, title = '', layerIndex = 0) {
   const card = document.createElement('div');
   card.classList.add('card');
   card.style.setProperty('--i', layerIndex);
@@ -142,24 +140,35 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
 
   const front = document.createElement('div');
   front.classList.add('card-face', 'card-front');
+
   const frontTitle = document.createElement('div');
   frontTitle.classList.add('card-title');
-  frontTitle.innerHTML = currentMode === 'quiz' ? `<i class="fas fa-brain"></i> ${title}` : title;
+  frontTitle.innerHTML = currentMode === 'quiz'
+    ? `<i class="fas fa-brain"></i> ${title}`
+    : title;
   const frontContent = document.createElement('div');
   frontContent.classList.add('card-content');
   frontContent.innerHTML = frontText;
-  if (currentMode === 'study') frontContent.classList.add('study-layout');
+
+  if (currentMode === 'study') {
+    frontContent.classList.add('study-layout');
+  }
+
   front.appendChild(frontTitle);
   front.appendChild(frontContent);
 
   const back = document.createElement('div');
   back.classList.add('card-face', 'card-back');
+
   const backTitle = document.createElement('div');
   backTitle.classList.add('card-title');
-  backTitle.innerHTML = currentMode === 'quiz' ? `<i class="fas fa-lightbulb"></i> Answer` : `Definition`;
+  backTitle.innerHTML = currentMode === 'quiz'
+    ? `<i class="fas fa-lightbulb"></i> Answer`
+    : `Definition`;
   const backContent = document.createElement('div');
   backContent.classList.add('card-content');
   backContent.innerHTML = backText;
+
   back.appendChild(backTitle);
   back.appendChild(backContent);
 
@@ -167,54 +176,23 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   inner.appendChild(back);
   card.appendChild(inner);
 
-  if (layerIndex === 0) {
-    if (currentMode === 'study') card.classList.add('float');
-    else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
-
-    let flipped = false;
-
-    const flipCard = () => {
-      card.classList.add('flipped');
-      flipped = true;
-    };
-
-    const unflipAndAdvance = () => {
-      card.classList.remove('flipped');
-      flipped = false;
-      shuffleCard(category);
-    };
-
-    if (isMobile) {
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!flipped) {
-          flipCard();
-        } else {
-          unflipAndAdvance();
-        }
-      });
-    } else {
-      card.addEventListener('mouseenter', () => {
-        flipCard();
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.classList.remove('flipped');
-        flipped = false;
-      });
-
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (flipped) {
-          unflipAndAdvance();
-        }
-      });
-    }
+if (layerIndex === 0) {
+  if (currentMode === 'study') {
+    card.classList.add('float');
+  } else if (currentMode === 'quiz') {
+    card.classList.add('quiz-wiggle');
   }
+
+  setTimeout(() => {
+    card.addEventListener('mouseenter', () => card.classList.add('flipped'));
+    card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+  }, 300);
+}
+
+
 
   return card;
 }
-
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
@@ -234,7 +212,7 @@ function renderDeck(category) {
     const frontText = currentMode === 'quiz' ? cardData.quizFront : cardData.studyFront;
     const backText = currentMode === 'quiz' ? cardData.quizBack : cardData.studyBack;
     const title = currentMode === 'quiz' ? cardData.quizTitle : cardData.studyTitle || '';
-    const card = createCardElement(frontText, backText, title, index, category);
+    const card = createCardElement(frontText, backText, title, index);
     stack.appendChild(card);
   });
 }
