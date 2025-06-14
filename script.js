@@ -193,7 +193,7 @@ if (isMobile) {
       setTimeout(() => {
         const cat = card.closest('.card-stack')?.id.replace('-stack', '');
         shuffleCard(cat);  // Advance to next card
-      }, 300); // matches flip animation time
+      }, 100); // matches flip animation time
     }
   });
 } else {
