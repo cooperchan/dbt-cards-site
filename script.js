@@ -174,7 +174,9 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (currentMode === 'study') card.classList.add('float');
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    //const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isMobile = window.matchMedia('(hover: none)').matches;
+
     let tappedOnce = false;
 
     if (isMobile) {
