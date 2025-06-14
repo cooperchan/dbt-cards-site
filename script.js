@@ -134,6 +134,8 @@ const currentIndices = {
 };
 
 function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
+  console.log("🖥 isMobile:", 'ontouchstart' in window || navigator.maxTouchPoints > 0);
+
   const card = document.createElement('div');
   card.classList.add('card');
   card.style.setProperty('--i', layerIndex);
