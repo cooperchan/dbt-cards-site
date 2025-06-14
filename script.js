@@ -187,21 +187,34 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (isMobile) {
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (!flipped) flipCard();
-        else unflipAndAdvance();
+        if (!flipped) {
+          flipCard();
+        } else {
+          unflipAndAdvance();
+        }
       });
     } else {
-      card.addEventListener('mouseenter', () => flipCard());
-      card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+      card.addEventListener('mouseenter', () => {
+        flipCard();
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('flipped');
+        flipped = false;
+      });
+
       card.addEventListener('click', (e) => {
         e.stopPropagation();
-        unflipAndAdvance();
+        if (flipped) {
+          unflipAndAdvance();
+        }
       });
     }
   }
 
   return card;
 }
+
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
