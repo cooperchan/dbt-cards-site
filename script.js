@@ -173,15 +173,27 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     
 
 if (isMobile) {
+  let hasFlipped = false;
+
   card.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isNowFlipped = card.classList.toggle('flipped');
-    if (!isNowFlipped) {
-      const cat = card.closest('.card-stack').id.replace('-stack', '');
-      shuffleCard(cat);
+
+    if (!hasFlipped) {
+      card.classList.add('flipped');
+      hasFlipped = true;
+    } else {
+      card.classList.remove('flipped');
+      hasFlipped = false;
+
+      // Delay shuffle slightly so the flip-back animation plays
+      setTimeout(() => {
+        const cat = card.closest('.card-stack').id.replace('-stack', '');
+        shuffleCard(cat);
+      }, 300); // Adjust delay as needed to match flip CSS duration
     }
   });
-} else {
+}
+ else {
       card.addEventListener('mouseenter', () => card.classList.add('flipped'));
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
       card.addEventListener('click', (e) => {
