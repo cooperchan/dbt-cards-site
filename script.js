@@ -170,22 +170,24 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
     const isMobile = window.matchMedia('(hover: none)').matches;
-    let flipped = false;
+    
 
-    if (isMobile) {
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!flipped) {
-          card.classList.add('flipped');
-          flipped = true;
-        } else {
-          flipped = false;
-          card.classList.remove('flipped');
-          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-          shuffleCard(cat);
-        }
-      });
+if (isMobile) {
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    if (!card.classList.contains('flipped')) {
+      card.classList.add('flipped');
     } else {
+      card.classList.remove('flipped');
+      const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+      setTimeout(() => {
+        shuffleCard(cat);
+      }, 300); // gives time for flip-back animation to finish
+    }
+  });
+}
+else {
       card.addEventListener('mouseenter', () => card.classList.add('flipped'));
       card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
       card.addEventListener('click', (e) => {
