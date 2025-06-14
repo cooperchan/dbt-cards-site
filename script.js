@@ -172,42 +172,39 @@ if (layerIndex === 0) {
   if (currentMode === 'study') card.classList.add('float');
   else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-  // Mobile detection
-  const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  let tappedOnce = false;
+// Mobile detection
+const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+let tappedOnce = false;
 
-  if (isMobile) {
-    //console.log("📱 Real mobile detected");
+if (isMobile) {
+  // Mobile behavior (tap to flip and advance)
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-    card.addEventListener('click', (e) => {
-      e.stopPropagation();
+    if (!tappedOnce) {
+      // Flip the card on first tap
+      card.classList.add('flipped');
+      tappedOnce = true;
+    } else {
+      // Unflip and advance to the next card on second tap
+      card.classList.remove('flipped');
+      tappedOnce = false;
 
-      if (!tappedOnce) {
-        //console.log("🔄 Tap 1: flip card");
-        card.classList.add('flipped');
-        tappedOnce = true;
-      } else {
-        //console.log("⏭ Tap 2: unflip and advance");
-        card.classList.remove('flipped');
-        tappedOnce = false;
+      setTimeout(() => {
+        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+        shuffleCard(cat);
+      }, 300); // matches flip animation time
+    }
+  });
+} else {
+  // Desktop behavior (only handle click to advance, hover will flip the card)
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+    shuffleCard(cat);
+  });
+}
 
-        setTimeout(() => {
-          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-          //console.log("🔁 Shuffling card for:", cat);
-          shuffleCard(cat);
-        }, 300); // matches flip animation
-      }
-    });
-  } else {
-    card.addEventListener('mouseenter', () => card.classList.add('flipped'));
-    card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
-    card.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-      //console.log("🖱 Desktop click: shuffle", cat);
-      shuffleCard(cat);
-    });
-  }
 
   // Ensures each new card starts unflipped
   setTimeout(() => {
