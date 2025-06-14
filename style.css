@@ -1,4 +1,6 @@
-/* ...your existing styles... */
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -159,6 +161,11 @@ h1 {
 
 /* Responsive for mobile */
 @media (max-width: 768px) {
+  body {
+    padding: 10px;
+    overflow-x: hidden;
+  }
+
   .decks-container {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -167,7 +174,14 @@ h1 {
 
   .card-stack {
     width: 90vw;
-    height: 140vw;
+    max-width: 350px;
+    height: auto;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .card-title {
