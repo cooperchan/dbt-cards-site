@@ -185,25 +185,34 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     }
 
     if (isMobile) {
+      // Mobile behavior: Tap to flip, tap again to shuffle (go to next card)
       card.addEventListener('click', (e) => {
         e.stopPropagation();
+
+        // If not flipped, flip it
         if (!flippedStates[category]) {
           card.classList.add('flipped');
           flippedStates[category] = true;
         } else {
-          // Once flipped, advance to next card's front
+          // If already flipped, shuffle the deck (go to next card)
           flippedStates[category] = false;
           shuffleCard(category);
         }
       });
     } else {
-      card.addEventListener('mouseenter', () => card.classList.add('flipped')); // Hover to flip
-      card.addEventListener('mouseleave', () => card.classList.remove('flipped')); // Hover out to unflip
+      // Desktop behavior: Hover to flip, click to go to next card
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('flipped');
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('flipped');
+      });
 
       card.addEventListener('click', (e) => {
         e.stopPropagation();
+        // Only shuffle the deck if the card is flipped
         if (card.classList.contains('flipped')) {
-          // If flipped, advance to next card's front
           flippedStates[category] = false;
           shuffleCard(category);
         }
@@ -213,6 +222,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
 
   return card;
 }
+
 
 
 function renderDeck(category) {
