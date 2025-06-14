@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 
 body {
   margin: 0;
@@ -173,7 +176,7 @@ h1 {
   }
 
   .card-stack {
-    width: 90vw;
+    width: 94vw;
     max-width: 350px;
     height: auto;
   }
