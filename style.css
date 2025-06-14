@@ -226,3 +226,9 @@ h1 {
   animation: quizWiggle 3s ease-in-out infinite;
   will-change: transform;
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+}
