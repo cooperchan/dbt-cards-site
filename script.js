@@ -283,6 +283,9 @@ window.onload = () => {
 };
 
 
-document.addEventListener('click', (e) => {
-  console.log('🧪 Document received click on:', e.target);
+document.querySelectorAll('.card').forEach((card) => {
+  card.addEventListener('click', () => {
+    console.log('🔥 Clicked .card — this is a raw test');
+  });
 });
+
