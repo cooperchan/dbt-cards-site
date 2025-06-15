@@ -281,3 +281,8 @@ function generateStackedCardContent(iconPath, titleText) {
 window.onload = () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
 };
+
+
+document.addEventListener('click', (e) => {
+  console.log('🧪 Document received click on:', e.target);
+});
