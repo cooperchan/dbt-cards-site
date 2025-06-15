@@ -226,6 +226,28 @@ inner.addEventListener('click', (e) => {
 }
 
 
+if (!isMobile) {
+  // Flip on hover
+  card.addEventListener('mouseenter', () => {
+    card.classList.add('flipped');
+  });
+
+  // Unflip on leave
+  card.addEventListener('mouseleave', () => {
+    card.classList.remove('flipped');
+  });
+
+  // Click: unflip, then shuffle
+  inner.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    card.classList.remove('flipped'); // Unflip
+    setTimeout(() => {
+      const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+      shuffleCard(cat);
+    }, 600); // Wait for visible unflip
+  });
+}
 
 
 
