@@ -174,9 +174,10 @@ if (layerIndex === 0) {
 
 // Mobile detection
 const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-let tappedOnce = false;
+
 
 if (isMobile) {
+  let tappedOnce = false;
   // Mobile behavior: Tap to flip and advance
   card.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -193,7 +194,7 @@ if (isMobile) {
       setTimeout(() => {
         const cat = card.closest('.card-stack')?.id.replace('-stack', '');
         shuffleCard(cat);  // Advance to next card
-      }, 300); // matches flip animation time
+      }, 600); // matches flip animation time
     }
   });
 } else {
@@ -208,12 +209,18 @@ if (isMobile) {
   });
 
 inner.addEventListener('click', (e) => {
-  console.log('👆 Inner card clicked — advancing');
   e.stopPropagation();
+
+  // Remove flipped class to flip card back to front
   card.classList.remove('flipped');
-  const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-  shuffleCard(cat);
+
+  // Wait for flip-back to finish, then advance
+  setTimeout(() => {
+    const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+    shuffleCard(cat);
+  }, 600); // matches CSS transition time
 });
+
 
 
 }
@@ -283,9 +290,4 @@ window.onload = () => {
 };
 
 
-document.querySelectorAll('.card').forEach((card) => {
-  card.addEventListener('click', () => {
-    console.log('🔥 Clicked .card — this is a raw test');
-  });
-});
 
