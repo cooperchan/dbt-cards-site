@@ -242,10 +242,10 @@ h1 {
 }
 
 
-@media (hover: hover) {
+/*@media (hover: hover) {
   .card:hover:not(.flipped) .card-inner {
     transform: rotateY(180deg) !important;
   }
-}
+}*/
 
 
