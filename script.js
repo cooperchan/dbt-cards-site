@@ -207,18 +207,14 @@ if (isMobile) {
     card.classList.remove('flipped');
   });
 
-  card.addEventListener('click', (e) => {
-    e.stopPropagation();
+card.addEventListener('click', (e) => {
+  console.log('👆 Card clicked — event listener active');  // <--- Add this
+  e.stopPropagation();
+  card.classList.remove('flipped');
+  const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+  shuffleCard(cat);
+});
 
-    // REMOVE the 'flipped' class to show the front of the next card
-    console.log('About to remove flipped');
-    card.classList.remove('flipped');
-    console.log('✅ flipped removed');
-
-    // Now advance to the next card on single click
-    const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-    shuffleCard(cat);
-  });
 }
 
 
