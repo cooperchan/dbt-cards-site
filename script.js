@@ -1,5 +1,3 @@
-//console.log("📱 isMobile:", window.matchMedia('(hover: none)').matches);
-
 
 // Mode toggle logic
 let currentMode = 'study';
@@ -168,148 +166,95 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   inner.appendChild(back);
   card.appendChild(inner);
 
-if (layerIndex === 0) {
-  if (currentMode === 'study') card.classList.add('float');
-  else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
+  if (layerIndex === 0) {
+    if (currentMode === 'study') card.classList.add('float');
+    else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-// Mobile detection
-const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
+    if (isMobile) {
+      let tapState = 0;
 
-if (isMobile) {
-  let tappedOnce = false;
-  // Mobile behavior: Tap to flip and advance
-  card.addEventListener('click', (e) => {
-    e.stopPropagation();
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
 
-    if (!tappedOnce) {
-      // Flip the card on first tap
-      card.classList.add('flipped');
-      tappedOnce = true;
+        if (tapState === 0) {
+          card.classList.add('flipped');
+          tapState = 1;
+        } else if (tapState === 1) {
+          card.classList.remove('flipped');
+          tapState = 2;
+        } else if (tapState === 2) {
+          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+          shuffleCard(cat);
+          tapState = 0;
+        }
+      });
     } else {
-      // Unflip and advance to the next card on second tap
-      card.classList.remove('flipped');
-      tappedOnce = false;
+      // Desktop: Hover flips, click unflips, second click advances
+      let wasFlipped = false;
 
-      setTimeout(() => {
-        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-        shuffleCard(cat);  // Advance to next card
-      }, 600); // matches flip animation time
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('flipped');
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('flipped');
+      });
+
+      inner.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (card.classList.contains('flipped')) {
+          card.classList.remove('flipped');
+          wasFlipped = true;
+        } else if (wasFlipped) {
+          wasFlipped = false;
+          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+          shuffleCard(cat);
+        }
+      });
     }
-  });
-} else {
-  // Desktop behavior: Hover flips, single click advances
-  card.addEventListener('mouseenter', () => {
-    // Hover flips the card
-    card.classList.add('flipped');
-  });
-  card.addEventListener('mouseleave', () => {
-    // On mouse leave, unflip the card
+
+    // Start every new card unflipped
     card.classList.remove('flipped');
-  });
-
-inner.addEventListener('click', (e) => {
-  e.stopPropagation();
-
-  // Remove flipped class to flip card back to front
-  card.classList.remove('flipped');
-
-  // Wait for flip-back to finish, then advance
-  setTimeout(() => {
-    const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-    shuffleCard(cat);
-  }, 600); // matches CSS transition time
-});
-
-
-
-}
-
-
-if (!isMobile) {
-  // Flip on hover
-  card.addEventListener('mouseenter', () => {
-    card.classList.add('flipped');
-  });
-
-  // Unflip on leave
-  card.addEventListener('mouseleave', () => {
-    card.classList.remove('flipped');
-  });
-
-  // Click: unflip, then shuffle
-  inner.addEventListener('click', (e) => {
-    e.stopPropagation();
-
-    card.classList.remove('flipped'); // Unflip
-    setTimeout(() => {
-      const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-      shuffleCard(cat);
-    }, 600); // Wait for visible unflip
-  });
-}
-
-
-
-  // Ensures each new card starts unflipped
-if (layerIndex === 0) {
-  console.log('About to remove flipped 2');
-  card.classList.remove('flipped'); // <- NEW safe reset for top card
-  console.log('✅ flipped removed 2');
-}
-
-
-}
-
+  }
 
   return card;
 }
 
 function renderDeck(category) {
   const stack = document.getElementById(`${category}-stack`);
-  stack.innerHTML = '';  // Clear previous cards
-  
+  stack.innerHTML = '';
+
   const deck = cardsByCategory[category];
-  const current = currentIndices[category];  // Get the current index for this category
+  const current = currentIndices[category];
 
   const cardIndices = [
     current,
-    (current + 1) % deck.length,  // Wrap around to first card if we're at the last one
-    (current + 2) % deck.length   // Wrap around as well
+    (current + 1) % deck.length,
+    (current + 2) % deck.length
   ];
 
-  // Render the current, next, and second next card
   cardIndices.forEach((i, index) => {
     const cardData = deck[i];
     const frontText = currentMode === 'quiz' ? cardData.quizFront : cardData.studyFront;
     const backText = currentMode === 'quiz' ? cardData.quizBack : cardData.studyBack;
     const title = currentMode === 'quiz' ? cardData.quizTitle : cardData.studyTitle || '';
     const card = createCardElement(frontText, backText, title, index, category);
-    stack.appendChild(card);  // Append to the stack (card container)
+    stack.appendChild(card);
   });
 }
 
-
-
-
 function shuffleCard(category) {
-  // Increment current index to show the next card
   currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
-  renderDeck(category);  // Render the deck with the updated index
+  renderDeck(category);
 }
 
-
 function generateStackedCardContent(iconPath, titleText) {
-  return "<div style='display:flex; flex-direction:column; align-items:center; justify-content:center; max-height:100%; width:100%; box-sizing:border-box; gap:16px'>\
-    <img src='" + iconPath + "' alt='icon top' style='height:80px; width:auto'>\
-    <div style='font-size:1.8rem; font-weight:700; text-align:center; line-height:1.2; word-break:break-word'>" + titleText.replace(" ", "<br>") + "</div>\
-    <img src='" + iconPath + "' alt='icon bottom flipped' style='height:80px; width:auto; transform:scaleY(-1)'>\
-  </div>";
+  return "<div style='display:flex; flex-direction:column; align-items:center; justify-content:center; max-height:100%; width:100%; box-sizing:border-box; gap:16px'>    <img src='" + iconPath + "' alt='icon top' style='height:80px; width:auto'>    <div style='font-size:1.8rem; font-weight:700; text-align:center; line-height:1.2; word-break:break-word'>" + titleText.replace(" ", "<br>") + "</div>    <img src='" + iconPath + "' alt='icon bottom flipped' style='height:80px; width:auto; transform:scaleY(-1)'>  </div>";
 }
 
 window.onload = () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
 };
-
-
-
