@@ -170,9 +170,9 @@ h1 {
   text-align: center;
 }
 
-.card:hover .card-inner {
+/*.card:hover .card-inner {
   transform: rotateY(180deg);
-}
+}*/
 
 
 @media (max-width: 768px) {
@@ -240,3 +240,10 @@ h1 {
   animation: quizWiggle 3s ease-in-out infinite;
   will-change: transform;
 }
+
+@media (hover: hover) {
+  .card:not(.flipped):hover .card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
