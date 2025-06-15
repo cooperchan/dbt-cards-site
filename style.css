@@ -241,9 +241,11 @@ h1 {
   will-change: transform;
 }
 
+
 @media (hover: hover) {
-  .card:not(.flipped):hover .card-inner {
-    transform: rotateY(180deg);
+  .card:hover:not(.flipped) .card-inner {
+    transform: rotateY(180deg) !important;
   }
 }
+
 
