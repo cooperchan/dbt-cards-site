@@ -211,7 +211,9 @@ if (isMobile) {
     e.stopPropagation();
 
     // REMOVE the 'flipped' class to show the front of the next card
+    console.log('About to remove flipped');
     card.classList.remove('flipped');
+    console.log('✅ flipped removed');
 
     // Now advance to the next card on single click
     const cat = card.closest('.card-stack')?.id.replace('-stack', '');
@@ -224,7 +226,12 @@ if (isMobile) {
 
 
   // Ensures each new card starts unflipped
- card.classList.remove('flipped');
+if (layerIndex === 0) {
+  console.log('About to remove flipped 2');
+  card.classList.remove('flipped'); // <- NEW safe reset for top card
+  console.log('✅ flipped removed 2');
+}
+
 
 }
 
