@@ -224,9 +224,8 @@ if (isMobile) {
 
 
   // Ensures each new card starts unflipped
-  setTimeout(() => {
-    card.classList.remove('flipped');
-  }, 0);
+ card.classList.remove('flipped');
+
 }
 
 
