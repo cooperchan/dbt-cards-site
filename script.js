@@ -207,13 +207,14 @@ if (isMobile) {
     card.classList.remove('flipped');
   });
 
-card.addEventListener('click', (e) => {
-  console.log('👆 Card clicked — event listener active');  // <--- Add this
+inner.addEventListener('click', (e) => {
+  console.log('👆 Inner card clicked — advancing');
   e.stopPropagation();
   card.classList.remove('flipped');
   const cat = card.closest('.card-stack')?.id.replace('-stack', '');
   shuffleCard(cat);
 });
+
 
 }
 
