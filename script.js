@@ -1,6 +1,3 @@
-if (window.matchMedia('(hover: hover)').matches && !('ontouchstart' in window)) {
-  document.body.classList.add('can-hover');
-}
 
 // Mode toggle logic
 let currentMode = 'study';
@@ -193,9 +190,10 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       }
     });
 
+    
     // Desktop hover preview (only for devices that support hover)
-    if (!isTouchDevice && window.matchMedia('(hover: hover)').matches) {
-      document.body.classList.add('can-hover');
+if (window.matchMedia('(hover: hover)').matches && !('ontouchstart' in window)) {
+  document.body.classList.add('can-hover');
 
       card.addEventListener('mouseenter', () => {
         if (!card.classList.contains('flipped')) {
