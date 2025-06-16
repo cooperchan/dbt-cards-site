@@ -250,6 +250,8 @@ h1 {
 
 
 
+/* Pure visual hover flip ONLY if not already flipped */
 body.can-hover .card:not(.flipped):hover .card-inner {
   transform: rotateY(180deg);
+  pointer-events: none; /* Prevent click issues during hover preview */
 }

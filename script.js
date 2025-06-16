@@ -1,3 +1,6 @@
+if (window.matchMedia('(hover: hover)').matches && !('ontouchstart' in window)) {
+  document.body.classList.add('can-hover');
+}
 
 // Mode toggle logic
 let currentMode = 'study';
@@ -250,6 +253,3 @@ window.onload = () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
 };
 
-if (window.matchMedia('(hover: hover)').matches && !('ontouchstart' in window)) {
-  document.body.classList.add('can-hover');
-}
