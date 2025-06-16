@@ -174,12 +174,6 @@ h1 {
   transform: rotateY(180deg);
 }*/
 
-.card.hover-preview .card-inner {
-  transform: rotateY(180deg);
-}
-
-
-
 
 @media (max-width: 768px) {
   .decks-container {
