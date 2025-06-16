@@ -170,46 +170,54 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (currentMode === 'study') card.classList.add('float');
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    let tapState = 0;
+    if (isMobile) {
+      let tapState = 0;
 
-    card.addEventListener('click', (e) => {
-      e.stopPropagation();
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
 
-      if (tapState === 0) {
-        card.classList.add('flipped');
-        tapState = 1;
-      } else if (tapState === 1) {
-        card.classList.remove('flipped');
-        tapState = 2;
-      } else if (tapState === 2) {
-        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-        shuffleCard(cat);
-        tapState = 0;
-      }
-    });
-
-    
-    // Desktop hover preview (only for devices that support hover)
-if (window.matchMedia('(hover: hover)').matches && !('ontouchstart' in window)) {
-  document.body.classList.add('can-hover');
+        if (tapState === 0) {
+          card.classList.add('flipped');
+          tapState = 1;
+        } else if (tapState === 1) {
+          card.classList.remove('flipped');
+          tapState = 2;
+        } else if (tapState === 2) {
+          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+          shuffleCard(cat);
+          tapState = 0;
+        }
+      });
+    } else {
+      // Desktop: Hover flips, click unflips, second click advances
+      let wasFlipped = false;
 
       card.addEventListener('mouseenter', () => {
-        if (!card.classList.contains('flipped')) {
-          card.classList.add('hover-preview');
-        }
+        card.classList.add('flipped');
       });
 
       card.addEventListener('mouseleave', () => {
-        card.classList.remove('hover-preview');
+        card.classList.remove('flipped');
+      });
+
+      inner.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (card.classList.contains('flipped')) {
+          card.classList.remove('flipped');
+          wasFlipped = true;
+        } else if (wasFlipped) {
+          wasFlipped = false;
+          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+          shuffleCard(cat);
+        }
       });
     }
 
     // Start every new card unflipped
     card.classList.remove('flipped');
-
-
   }
 
   return card;
@@ -250,4 +258,3 @@ function generateStackedCardContent(iconPath, titleText) {
 window.onload = () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
 };
-
