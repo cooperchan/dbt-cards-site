@@ -170,64 +170,44 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (currentMode === 'study') card.classList.add('float');
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-      const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    if (isMobile) {
-      let tapState = 0;
+    let tapState = 0;
 
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
 
-        if (tapState === 0) {
-          card.classList.add('flipped');
-          tapState = 1;
-        } else if (tapState === 1) {
-          card.classList.remove('flipped');
-          tapState = 2;
-        } else if (tapState === 2) {
-          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-          shuffleCard(cat);
-          tapState = 0;
-        }
-      });
-    } else {
-      // Desktop: Hover support + click logic synced
-      let tapState = 0;
-
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
-
-        if (tapState === 0) {
-          card.classList.add('flipped');
-          tapState = 1;
-        } else if (tapState === 1) {
-          card.classList.remove('flipped');
-          tapState = 2;
-        } else if (tapState === 2) {
-          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-          shuffleCard(cat);
-          tapState = 0;
-        }
-      });
-
-      // Allow hover effect only if device supports hover
-      if (window.matchMedia('(hover: hover)').matches) {
-        document.body.classList.add('can-hover');
-
-        card.addEventListener('mouseenter', () => {
-          if (!card.classList.contains('flipped')) {
-            card.classList.add('hover-preview');
-          }
-        });
-
-        card.addEventListener('mouseleave', () => {
-          card.classList.remove('hover-preview');
-        });
+      if (tapState === 0) {
+        card.classList.add('flipped');
+        tapState = 1;
+      } else if (tapState === 1) {
+        card.classList.remove('flipped');
+        tapState = 2;
+      } else if (tapState === 2) {
+        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+        shuffleCard(cat);
+        tapState = 0;
       }
+    });
+
+    // Desktop hover preview (only for devices that support hover)
+    if (!isTouchDevice && window.matchMedia('(hover: hover)').matches) {
+      document.body.classList.add('can-hover');
+
+      card.addEventListener('mouseenter', () => {
+        if (!card.classList.contains('flipped')) {
+          card.classList.add('hover-preview');
+        }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('hover-preview');
+      });
     }
 
     // Start every new card unflipped
     card.classList.remove('flipped');
+
 
   }
 
