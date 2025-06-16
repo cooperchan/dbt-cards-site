@@ -170,7 +170,7 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
     if (currentMode === 'study') card.classList.add('float');
     else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
 
-    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (isMobile) {
       let tapState = 0;
@@ -191,33 +191,44 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
         }
       });
     } else {
-      // Desktop: Hover flips, click unflips, second click advances
-      let wasFlipped = false;
+      // Desktop: Hover support + click logic synced
+      let tapState = 0;
 
-      card.addEventListener('mouseenter', () => {
-        card.classList.add('flipped');
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.classList.remove('flipped');
-      });
-
-      inner.addEventListener('click', (e) => {
+      card.addEventListener('click', (e) => {
         e.stopPropagation();
 
-        if (card.classList.contains('flipped')) {
+        if (tapState === 0) {
+          card.classList.add('flipped');
+          tapState = 1;
+        } else if (tapState === 1) {
           card.classList.remove('flipped');
-          wasFlipped = true;
-        } else if (wasFlipped) {
-          wasFlipped = false;
+          tapState = 2;
+        } else if (tapState === 2) {
           const cat = card.closest('.card-stack')?.id.replace('-stack', '');
           shuffleCard(cat);
+          tapState = 0;
         }
       });
+
+      // Allow hover effect only if device supports hover
+      if (window.matchMedia('(hover: hover)').matches) {
+        document.body.classList.add('can-hover');
+
+        card.addEventListener('mouseenter', () => {
+          if (!card.classList.contains('flipped')) {
+            card.classList.add('hover-preview');
+          }
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('hover-preview');
+        });
+      }
     }
 
     // Start every new card unflipped
     card.classList.remove('flipped');
+
   }
 
   return card;

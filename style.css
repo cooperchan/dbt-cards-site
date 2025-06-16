@@ -249,3 +249,7 @@ h1 {
 }*/
 
 
+/* Desktop hover preview only if .can-hover is on body */
+.can-hover .card.hover-preview .card-inner {
+  transform: rotateY(180deg);
+}
