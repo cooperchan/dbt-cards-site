@@ -194,16 +194,13 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       // Desktop: Hover flips, click unflips, second click advances
       let wasFlipped = false;
 
-card.addEventListener('mouseenter', () => {
-  if (!card.classList.contains('flipped')) {
-    card.classList.add('hover-preview');
-  }
-});
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('flipped');
+      });
 
-card.addEventListener('mouseleave', () => {
-  card.classList.remove('hover-preview');
-});
-
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('flipped');
+      });
 
       inner.addEventListener('click', (e) => {
         e.stopPropagation();

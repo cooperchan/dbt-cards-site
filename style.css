@@ -140,15 +140,11 @@ h1 {
 .card-front {
   transform: rotateY(0deg);
   z-index: 2;
-  opacity: 1;
-  transition: opacity 0.3s ease;
 }
 
 .card-back {
   transform: rotateY(180deg);
   z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
 .card-title {
@@ -243,15 +239,4 @@ h1 {
 .card.quiz-wiggle {
   animation: quizWiggle 3s ease-in-out infinite;
   will-change: transform;
-}
-
-
-.card.hover-preview .card-front {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.card.hover-preview .card-back {
-  opacity: 1;
-  pointer-events: auto;
 }
