@@ -195,13 +195,11 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
       let wasFlipped = false;
 
       card.addEventListener('mouseenter', () => {
-        //card.classList.add('flipped');
-        inner.style.transform = 'rotateY(180deg)';
+        card.classList.add('flipped');
       });
 
       card.addEventListener('mouseleave', () => {
-        //card.classList.remove('flipped');
-        inner.style.transform = '';
+        card.classList.remove('flipped');
       });
 
       inner.addEventListener('click', (e) => {
