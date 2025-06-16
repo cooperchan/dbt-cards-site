@@ -250,7 +250,6 @@ h1 {
 
 
 
-/* Only apply hover flip when body has can-hover and card is not flipped */
-.can-hover .card.hover-preview .card-inner {
+body.can-hover .card:not(.flipped):hover .card-inner {
   transform: rotateY(180deg);
 }

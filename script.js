@@ -249,3 +249,7 @@ function generateStackedCardContent(iconPath, titleText) {
 window.onload = () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
 };
+
+if (window.matchMedia('(hover: hover)').matches && !('ontouchstart' in window)) {
+  document.body.classList.add('can-hover');
+}
