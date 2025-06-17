@@ -1,4 +1,23 @@
 
+
+
+let inputMethod = null;
+
+window.addEventListener('touchstart', () => {
+  if (!inputMethod) {
+    inputMethod = 'touch';
+    console.log('User is using touch');
+  }
+}, { once: true });
+
+window.addEventListener('mousemove', () => {
+  if (!inputMethod) {
+    inputMethod = 'mouse';
+    console.log('User is using mouse');
+  }
+}, { once: true });
+
+
 // Mode toggle logic
 let currentMode = 'study';
 
@@ -131,6 +150,77 @@ const currentIndices = {
   mindfulness: 0
 };
 
+function attachTopCardListeners(card, inner) {
+  if (!inputMethod) return;
+
+  if (inputMethod === 'mouse') {
+    //let wasFlipped = false;
+
+card.addEventListener('mouseenter', () => {
+  if (!card.classList.contains('no-hover') && card.clickState === 0) {
+    card.clickState = 1;
+    card.classList.add('flipped');
+  }
+});
+
+card.addEventListener('mouseleave', () => {
+  if (!card.classList.contains('no-hover') && card.clickState === 1) {
+    card.classList.remove('flipped');
+    card.clickState = 2;
+  }
+});
+
+
+
+
+
+card.clickState = 0;
+
+inner.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log('clickState:', card.clickState, 'flipped?', card.classList.contains('flipped'));
+  if (card.clickState === 0) {
+    // Flip forward
+    card.classList.add('flipped');
+    card.clickState = 1;
+  } else if (card.clickState === 1) {
+    // Flip back
+    card.classList.remove('flipped');
+    card.clickState = 2;
+  } else if (card.clickState === 2) {
+    // Advance on next click
+    const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+    shuffleCard(cat);
+    card.clickState = 0; // reset for next card
+  }
+});
+
+
+
+
+
+    
+  } else if (inputMethod === 'touch') {
+    let tapState = 0;
+
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (tapState === 0) {
+        card.classList.add('flipped');
+        tapState = 1;
+      } else if (tapState === 1) {
+        card.classList.remove('flipped');
+        tapState = 2;
+      } else if (tapState === 2) {
+        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+        shuffleCard(cat);
+        tapState = 0;
+      }
+    });
+  }
+}
+
+
 function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
   const card = document.createElement('div');
   card.classList.add('card');
@@ -166,59 +256,29 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   inner.appendChild(back);
   card.appendChild(inner);
 
-  if (layerIndex === 0) {
-    if (currentMode === 'study') card.classList.add('float');
-    else if (currentMode === 'quiz') card.classList.add('quiz-wiggle');
+if (layerIndex === 0) {
+  if (currentMode === 'study') {
+  card.classList.add('float');
+} else if (currentMode === 'quiz') {
+  card.classList.add('quiz-wiggle');
+}
 
-    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    if (isMobile) {
-      let tapState = 0;
-
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
-
-        if (tapState === 0) {
-          card.classList.add('flipped');
-          tapState = 1;
-        } else if (tapState === 1) {
-          card.classList.remove('flipped');
-          tapState = 2;
-        } else if (tapState === 2) {
-          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-          shuffleCard(cat);
-          tapState = 0;
-        }
-      });
-    } else {
-      // Desktop: Hover flips, click unflips, second click advances
-      let wasFlipped = false;
-
-      card.addEventListener('mouseenter', () => {
-        card.classList.add('flipped');
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.classList.remove('flipped');
-      });
-
-      inner.addEventListener('click', (e) => {
-        e.stopPropagation();
-
-        if (card.classList.contains('flipped')) {
-          card.classList.remove('flipped');
-          wasFlipped = true;
-        } else if (wasFlipped) {
-          wasFlipped = false;
-          const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-          shuffleCard(cat);
-        }
-      });
-    }
-
-    // Start every new card unflipped
-    card.classList.remove('flipped');
+  if (inputMethod) {
+    attachTopCardListeners(card, inner);
+  } else {
+    const waitForInput = setInterval(() => {
+      if (inputMethod) {
+        clearInterval(waitForInput);
+        attachTopCardListeners(card, inner);
+      }
+    }, 50);
   }
+}
+
+// Reset flip and click state on new card creation
+card.classList.remove('flipped');
+card.clickState = 0;
+
 
   return card;
 }
@@ -242,14 +302,32 @@ function renderDeck(category) {
     const backText = currentMode === 'quiz' ? cardData.quizBack : cardData.studyBack;
     const title = currentMode === 'quiz' ? cardData.quizTitle : cardData.studyTitle || '';
     const card = createCardElement(frontText, backText, title, index, category);
+
+
+    // Add no-hover only to the new top card (index 0)
+    if (index === 0) {
+       card.clickState = 0;
+      card.classList.add('no-hover');
+
+      // Remove no-hover after short delay to prevent instant auto-flip
+      setTimeout(() => {
+        card.classList.remove('no-hover');
+      }, 300); // Match this to your flip transition duration
+    }
+
     stack.appendChild(card);
   });
 }
+
+
+
 
 function shuffleCard(category) {
   currentIndices[category] = (currentIndices[category] + 1) % cardsByCategory[category].length;
   renderDeck(category);
 }
+
+
 
 function generateStackedCardContent(iconPath, titleText) {
   return "<div style='display:flex; flex-direction:column; align-items:center; justify-content:center; max-height:100%; width:100%; box-sizing:border-box; gap:16px'>    <img src='" + iconPath + "' alt='icon top' style='height:80px; width:auto'>    <div style='font-size:1.8rem; font-weight:700; text-align:center; line-height:1.2; word-break:break-word'>" + titleText.replace(" ", "<br>") + "</div>    <img src='" + iconPath + "' alt='icon bottom flipped' style='height:80px; width:auto; transform:scaleY(-1)'>  </div>";
