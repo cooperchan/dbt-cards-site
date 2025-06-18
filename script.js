@@ -2,20 +2,22 @@
 
 
 let inputMethod = null;
+let hasTouched = false;
 
 window.addEventListener('touchstart', () => {
   if (!inputMethod) {
     inputMethod = 'touch';
     console.log('User is using touch');
   }
-}, { once: true });
+  hasTouched = true;
+}, { once: false });
 
 window.addEventListener('mousemove', () => {
   if (!inputMethod) {
     inputMethod = 'mouse';
-    console.log('User is using mouse');
+    console.log('User is using mouse - INPUT SWITCH: touch → mouse');
   }
-}, { once: true });
+}, { once: false });
 
 
 // Mode toggle logic
@@ -150,75 +152,64 @@ const currentIndices = {
   mindfulness: 0
 };
 
+
 function attachTopCardListeners(card, inner) {
-  if (!inputMethod) return;
+  // Initialize both states if not already set
+  card.clickState = 0;
+  card.tapState = 0;
 
-  if (inputMethod === 'mouse') {
-    //let wasFlipped = false;
+  card.addEventListener('mouseenter', () => {
+    if (!card.classList.contains('no-hover') && inputMethod === 'mouse') {
+      card.classList.add('flipped');
 
-card.addEventListener('mouseenter', () => {
-  if (!card.classList.contains('no-hover') && card.clickState === 0) {
-    card.clickState = 1;
-    card.classList.add('flipped');
-  }
-});
-
-card.addEventListener('mouseleave', () => {
-  if (!card.classList.contains('no-hover') && card.clickState === 1) {
-    card.classList.remove('flipped');
-    card.clickState = 2;
-  }
-});
+      // Only set clickState if user has never touched the screen
+      if (!hasTouched) {
+        card.clickState = 1;
+      }
+    }
+  });
 
 
+  card.addEventListener('mouseleave', () => {
+    if (!card.classList.contains('no-hover') && inputMethod === 'mouse') {
+      card.classList.remove('flipped');
+    }
+  });
 
+  // Click/tap handler
+  inner.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-
-card.clickState = 0;
-
-inner.addEventListener('click', (e) => {
-  e.stopPropagation();
-  console.log('clickState:', card.clickState, 'flipped?', card.classList.contains('flipped'));
-  if (card.clickState === 0) {
-    // Flip forward
-    card.classList.add('flipped');
-    card.clickState = 1;
-  } else if (card.clickState === 1) {
-    // Flip back
-    card.classList.remove('flipped');
-    card.clickState = 2;
-  } else if (card.clickState === 2) {
-    // Advance on next click
-    const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-    shuffleCard(cat);
-    card.clickState = 0; // reset for next card
-  }
-});
-
-
-
-
-
-    
-  } else if (inputMethod === 'touch') {
-    let tapState = 0;
-
-    card.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (tapState === 0) {
+    if (inputMethod === 'touch') {
+      console.log(`TOUCH CLICK → tapState: ${card.tapState}`);
+      if (card.tapState === 0) {
         card.classList.add('flipped');
-        tapState = 1;
-      } else if (tapState === 1) {
+        card.tapState = 1;
+      } else if (card.tapState === 1) {
         card.classList.remove('flipped');
-        tapState = 2;
-      } else if (tapState === 2) {
+        card.tapState = 2;
+      } else if (card.tapState === 2) {
         const cat = card.closest('.card-stack')?.id.replace('-stack', '');
         shuffleCard(cat);
-        tapState = 0;
+        card.tapState = 0;
       }
-    });
-  }
+    } else if (inputMethod === 'mouse') {
+      console.log(`MOUSE CLICK → clickState: ${card.clickState}`);
+      if (card.clickState === 0) {
+        card.classList.add('flipped');
+        card.clickState = 1;
+      } else if (card.clickState === 1) {
+        card.classList.remove('flipped');
+        card.clickState = 2;
+      } else if (card.clickState === 2) {
+        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+        shuffleCard(cat);
+        card.clickState = 0;
+      }
+    }
+  });
 }
+
 
 
 function createCardElement(frontText, backText, title = '', layerIndex = 0, category = '') {
@@ -256,28 +247,29 @@ function createCardElement(frontText, backText, title = '', layerIndex = 0, cate
   inner.appendChild(back);
   card.appendChild(inner);
 
-if (layerIndex === 0) {
-  if (currentMode === 'study') {
-  card.classList.add('float');
-} else if (currentMode === 'quiz') {
-  card.classList.add('quiz-wiggle');
-}
+  if (layerIndex === 0) {
+    if (currentMode === 'study') {
+      card.classList.add('float');
+    } else if (currentMode === 'quiz') {
+      card.classList.add('quiz-wiggle');
+    }
 
-  if (inputMethod) {
-    attachTopCardListeners(card, inner);
-  } else {
-    const waitForInput = setInterval(() => {
-      if (inputMethod) {
-        clearInterval(waitForInput);
-        attachTopCardListeners(card, inner);
-      }
-    }, 50);
+    if (inputMethod) {
+      attachTopCardListeners(card, inner);
+    } else {
+      const waitForInput = setInterval(() => {
+        if (inputMethod) {
+          clearInterval(waitForInput);
+          attachTopCardListeners(card, inner);
+        }
+      }, 50);
+    }
   }
-}
 
-// Reset flip and click state on new card creation
-card.classList.remove('flipped');
-card.clickState = 0;
+  // Reset flip and click state on new card creation
+  card.classList.remove('flipped');
+  card.clickState = 0;
+  card.tapState = 0;
 
 
   return card;
@@ -306,13 +298,14 @@ function renderDeck(category) {
 
     // Add no-hover only to the new top card (index 0)
     if (index === 0) {
-       card.clickState = 0;
+      card.clickState = 0;
+      card.tapState = 0;
       card.classList.add('no-hover');
 
       // Remove no-hover after short delay to prevent instant auto-flip
       setTimeout(() => {
         card.classList.remove('no-hover');
-      }, 300); // Match this to your flip transition duration
+      }, 300);
     }
 
     stack.appendChild(card);
