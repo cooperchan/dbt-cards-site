@@ -1,41 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DBT Flashcard Decks</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <h1>DBT Flashcard Decks</h1>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <button id="modeToggle">Mode: Study</button>
-  <p id="flipHint">(Tap or Swipe to Flip)</p>
+</head>
+
+
+<body>
+
+<!--<div id="doorIntro" class="fixed inset-0 z-[9999] px-4 flex items-center justify-center h-full transition-opacity duration-1000" style="background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%);"> 
+<div class="absolute bottom-10 w-[500px] h-[280px] rounded-full bg-yellow-200 opacity-40 blur-2xl"></div>
+<div class="relative">
+  <div class="absolute inset-0 z-0 blur-3xl rounded-full bg-[rgba(255,215,0,0.25)] scale-105"></div>
+  <img src="assets/images/sunlit-door.png" alt="Sunlit Door" class="relative z-10 w-[90%] max-w-[600px] md:max-w-[750px] animate-doorFade"
+  />
+</div>
+</div>
+-->
+
+<div id="cardIntro"
+     class="fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-1000"
+     style="background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%)">
+  <div class="grid grid-cols-2 md:flex gap-4">
+    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">❤️</div>
+    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">🔥</div>
+    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">💬</div>
+    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">🧘‍♀️</div>
+  </div>
+</div>
+
+
+
+
+<div id="mainContent" class="opacity-0 transition-opacity duration-1000">
+
+ <div class="flex flex-col items-center gap-2 mt-6">
+  <h1 class="text-3xl font-bold">DBT Flashcard Decks</h1>
+  <p class="text-sm text-zinc-700 italic">Explore each skill. Tap to flip. Swipe to learn.</p>
+  <button id="modeToggle" 
+  class="bg-white/50 backdrop-blur-md shadow-md rounded-lg px-4 py-2 text-sm font-semibold text-zinc-800 hover:bg-white/60 transition">Mode: Study</button>
+</div>
+
+
+  <!--<p id="flipHint">(Tap or Swipe to Flip)</p>-->
 
   <div class="decks-container">
     <div class="deck" onclick="shuffleCard('emotion')">
       <div class="deck-label">Emotion Regulation</div>
+      <div class="dropdown-container" id="emotion-dropdown"></div>
+      <br>
       <div class="card-stack" id="emotion-stack"></div>
     </div>
 
     <div class="deck" onclick="shuffleCard('distress')">
       <div class="deck-label">Distress Tolerance</div>
+      <div class="dropdown-container" id="distress-dropdown"></div>
+      <br>
       <div class="card-stack" id="distress-stack"></div>
     </div>
 
     <div class="deck" onclick="shuffleCard('interpersonal')">
       <div class="deck-label">Interpersonal Effectiveness</div>
+      <div class="dropdown-container" id="interpersonal-dropdown"></div>
+      <br>
       <div class="card-stack" id="interpersonal-stack"></div>
     </div>
 
     <div class="deck" onclick="shuffleCard('mindfulness')">
       <div class="deck-label">Mindfulness</div>
+      <div class="dropdown-container" id="mindfulness-dropdown"></div>
+      <br>
       <div class="card-stack" id="mindfulness-stack"></div>
     </div>
   </div>
 
+<div class="background-float-layer">
+  <span class="float-orb orb-a"></span>
+  <span class="float-orb orb-b"></span>
+  <span class="float-orb orb-c"></span>
+  <span class="float-orb orb-d"></span>
+  <span class="float-orb orb-e"></span>
+  <span class="float-orb orb-f"></span>
+  <span class="float-orb orb-g"></span>
+  <span class="float-orb orb-h"></span>
+  <span class="float-orb orb-i"></span>
+  <span class="float-orb orb-j"></span>
+  <span class="float-orb orb-k"></span>
+  <span class="float-orb orb-l"></span>
+</div>
+
+
+</div>
+
   <script src="script.js"></script>
+
+  <!--<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const intro = document.getElementById('doorIntro');
+  setTimeout(() => {
+    intro.classList.add('opacity-0');
+    setTimeout(() => {
+      intro.style.display = 'none';
+    }, 1000); // Wait for fade-out transition
+  }, 2500); // Show for 2.5s
+});
+</script>-->
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const intro = document.getElementById('cardIntro');
+    const main = document.getElementById('mainContent');
+
+    setTimeout(() => {
+      intro.classList.add('opacity-0');
+      main.classList.remove('opacity-0');
+
+      // Remove the intro from layout flow after fade
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 1000); // match the transition-opacity duration
+    }, 2700); // delay to show animation first
+  });
+</script>
+
+
+
 </body>
+
 </html>

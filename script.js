@@ -310,6 +310,8 @@ function renderDeck(category) {
 
     stack.appendChild(card);
   });
+  renderDropdown(category);
+
 }
 
 
@@ -325,6 +327,47 @@ function shuffleCard(category) {
 function generateStackedCardContent(iconPath, titleText) {
   return "<div style='display:flex; flex-direction:column; align-items:center; justify-content:center; max-height:100%; width:100%; box-sizing:border-box; gap:16px'>    <img src='" + iconPath + "' alt='icon top' style='height:80px; width:auto'>    <div style='font-size:1.8rem; font-weight:700; text-align:center; line-height:1.2; word-break:break-word'>" + titleText.replace(" ", "<br>") + "</div>    <img src='" + iconPath + "' alt='icon bottom flipped' style='height:80px; width:auto; transform:scaleY(-1)'>  </div>";
 }
+
+
+function renderDropdown(category) {
+  const dropdownContainer = document.getElementById(`${category}-dropdown`);
+  if (!dropdownContainer) return;
+
+  const select = document.createElement('select');
+  select.innerHTML = `<option value="">Go to a specific skill…</option>`;
+  select.className = "w-[250px] px-4 py-2 rounded-lg shadow-sm border border-gray-300 bg-white text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300 truncate";
+
+
+
+  cardsByCategory[category].forEach((card, index) => {
+    const title = currentMode === 'quiz' ? card.quizTitle : card.studyTitle || 'Untitled';
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = title;
+    select.appendChild(option);
+  });
+
+
+    // Prevent click from triggering card advancement
+  select.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Handle selection
+  select.addEventListener('change', (e) => {
+    const selectedIndex = parseInt(e.target.value);
+    if (!isNaN(selectedIndex)) {
+      currentIndices[category] = selectedIndex;
+      renderDeck(category);
+    }
+  });
+
+  
+  dropdownContainer.innerHTML = ''; // Clear existing
+  dropdownContainer.appendChild(select);
+}
+
+
 
 window.onload = () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
