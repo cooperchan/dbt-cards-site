@@ -29,7 +29,11 @@
      class="fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-1000"
      style="background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%)">
   <div class="grid grid-cols-2 md:flex gap-4">
-    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">❤️</div>
+    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">
+        <img src="assets/images/sunlit-door.png" alt="Door" class="max-h-[90%] max-w-[90%] object-contain">
+
+
+    </div>
     <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">🔥</div>
     <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">💬</div>
     <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]">🧘‍♀️</div>
@@ -113,6 +117,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>-->
 
+
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     const intro = document.getElementById('cardIntro');
@@ -131,6 +136,41 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
+
+<footer class="w-full mt-12">
+  <div class="w-screen bg-white/30 backdrop-blur-sm shadow-inner border-t border-white/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 text-center text-sm text-zinc-700 flex flex-col items-center gap-2">
+      <div class="flex gap-4 text-xl items-center">
+        <a href="https://instagram.com/sunlitdoordesigns" target="_blank" aria-label="Instagram" class="hover:text-pink-500 transition">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://etsy.com/shop/sunlitdoordesigns" target="_blank" aria-label="Etsy" class="hover:text-orange-500 transition">
+          <i class="fab fa-etsy"></i>
+        </a>
+        <button id="aboutToggle" class="text-sm text-blue-600 underline hover:text-blue-800 transition ml-2">
+         About This Site
+        </button>
+      </div>
+
+      <div id="aboutContent" class="max-w-xl mt-2 text-sm text-zinc-700 hidden">
+        <p>
+          This site was built by one person, from coding and design to drawing the intro illustrations and writing the flashcard content (with the exception of icons, which were sourced using system emojis, Font Awesome, and Canva). 
+          It was created on a shoestring budget as a personal passion project, with the goal of making DBT skills easier to explore and practice, for free.
+        </p>
+      </div>
+
+      <p class="pt-2">&copy; 2025 Sunlit Door Designs. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  document.getElementById('aboutToggle').addEventListener('click', function () {
+    const content = document.getElementById('aboutContent');
+    content.classList.toggle('hidden');
+  });
+</script>
 
 </body>
 
