@@ -101,7 +101,7 @@ Which of the following best describes the purpose of the Build Mastery skill in 
       studyFront: `
           <div class="icon-transform-container">
           <i class="fa-solid fa-magnifying-glass magic-icon trail-icon"></i>
-          <i class="fa-solid fa-list-check magic-icon revealed-icon"></i>
+          <i class="fa-solid fa-check-to-slot magic-icon revealed-icon"></i>
           </div>
           <p>\n strong feelings deserve solid reflection</p>
           `,      quizBack: `situation / assumptions\n
@@ -289,21 +289,522 @@ quizBack: `<div class="activity-wrapper">
       quizBack: "It helps you survive emotional crises without making things worse.\nIt’s important for staying safe and grounded when emotions feel overwhelming.",
       studyBack: "calmly and successfully navigate difficult or stressful situations without resorting to destructive or self-defeating behaviors"
     },
-    {
-      quizFront: "What does STOP stand for?",
-      quizTitle: "STOP Skill Quiz",
-      studyTitle: "STOP Skill",
-      studyFront: "",
-      quizBack: "🛑 Stop\n🚶 Take a step back\n👀 Observe\n🎯 Proceed mindfully",
-      studyBack: "Crisis survival skill to pause and respond mindfully"
+        {
+quizFront: `
+<div class="text-[0.8rem] leading-[1.05] flex justify-center">
+  <div class="w-full max-w-md">
+<p class="mb-0 text-center font-medium text-[0.7rem] leading-snug">
+  <strong>Match each example to the correct ACCEPTS skill:</strong>
+</p>
+    <ul class="space-y-0 mt-[-0.25rem]">
+      <li class="grid grid-cols-2 gap-x-2">
+        <span>Going for a walk</span>
+        <span class="border-l border-zinc-300 pl-3">Comparisons</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2">
+        <span>Volunteering at a food pantry</span>
+        <span class="border-l border-zinc-300 pl-3">Emotions</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2">
+        <span>Thinking about how you’ve grown</span>
+        <span class="border-l border-zinc-300 pl-3">Sensations</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2">
+        <span>Watching a funny video</span>
+        <span class="border-l border-zinc-300 pl-3">Pushing Away</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2">
+        <span>Imagining putting the problem in a box</span>
+        <span class="border-l border-zinc-300 pl-3">Thoughts</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2">
+        <span>Counting backward from 100</span>
+        <span class="border-l border-zinc-300 pl-3">Activities</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2">
+        <span>Holding an ice cube</span>
+        <span class="border-l border-zinc-300 pl-3">Contributing</span>
+      </li>
+    </ul>
+  </div>
+</div>
+`
+,
+      quizTitle: "Distract Quiz",
+      studyTitle: "Distract",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-brain magic-icon trail-icon"></i>
+          <i class="fa-solid fa-hands-holding-circle magic-icon revealed-icon"></i>
+          </div>
+          <p>\n the Wise Mind "ACCEPTS"</p>
+          `,
+      quizBack: `<div class="card-content quiz-card" style="font-size: 1rem;"> 
+Answer Key:
+
+1. Activities – Going for a walk  
+2. Contributing – Volunteering at a food pantry  
+3. Comparisons – Thinking about how you’ve grown  
+4. Emotions – Watching a funny video  
+5. Pushing Away – Imagining putting the problem in a box  
+6. Thoughts – Counting backward from 100  
+7. Sensations – Holding an ice cube
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+      Distract, a skill that helps reduce emotional intensity by shifting focus, 
+      uses the ACCEPTS acronym to redirect attention away from distress. 
+      Each letter stands for a healthy distraction strategy:
+      Activities, Contributing, Comparisons, Emotions, Pushing away, Thoughts, and Sensations,
+      all which give your mind space to calm without avoiding reality.
+      </div>`
+    },
+        {
+      quizFront: `<div class="text-[0.8rem] leading-[1.05] flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-0 text-center font-medium text-[0.7rem] leading-snug">
+      <strong>Match each icon to the correct IMPROVE strategy:</strong>
+    </p>
+    <ul class="space-y-0 mt-[-0.25rem]">
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span><i class="fa-solid fa-hand-holding-heart"></i></span>
+        <span class="border-l border-zinc-300 pl-3">Encouragement</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span><i class="fa-solid fa-panorama"></i></span>
+        <span class="border-l border-zinc-300 pl-3">Vacation</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span><i class="fa-solid fa-hands-praying"></i></span>
+        <span class="border-l border-zinc-300 pl-3">Relaxation</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span><i class="fa-solid fa-plane-departure"></i></span>
+        <span class="border-l border-zinc-300 pl-3">One Thing In The Moment</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span><i class="fa-solid fa-thumbs-up"></i></span>
+        <span class="border-l border-zinc-300 pl-3">Meaning</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span><i class="fa-solid fa-spa"></i></span>
+        <span class="border-l border-zinc-300 pl-3">Imagery</span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span><i class="fa-solid fa-bullseye"></i></span>
+        <span class="border-l border-zinc-300 pl-3">Prayer</span>
+      </li>
+    </ul>
+  </div>
+</div>
+`,
+      quizTitle: "IMPROVE Quiz",
+      studyTitle: "IMPROVE",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-arrow-trend-up magic-icon trail-icon"></i>
+          <i class="fa-solid fa-ranking-star magic-icon revealed-icon"></i>
+          </div>
+          <p>\n IMPROVE the moment</p>
+          `,
+      quizBack: `<div class="text-[0.8rem] leading-[1.05] flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-0 text-center font-medium text-[0.7rem] leading-snug">
+      <strong>Answer Key: Each IMPROVE strategy matched to its icon</strong>
+    </p>
+    <ul class="space-y-0 mt-[-0.25rem]">
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span>Imagery</span>
+        <span class="border-l border-zinc-300 pl-3"><i class="fa-solid fa-panorama"></i></span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span>Meaning</span>
+        <span class="border-l border-zinc-300 pl-3"><i class="fa-solid fa-hand-holding-heart"></i></span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span>Prayer</span>
+        <span class="border-l border-zinc-300 pl-3"><i class="fa-solid fa-hands-praying"></i></span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span>Relaxation</span>
+        <span class="border-l border-zinc-300 pl-3"><i class="fa-solid fa-spa"></i></span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span>One Thing In The Moment</span>
+        <span class="border-l border-zinc-300 pl-3"><i class="fa-solid fa-bullseye"></i></span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span>Vacation</span>
+        <span class="border-l border-zinc-300 pl-3"><i class="fa-solid fa-plane-departure"></i></span>
+      </li>
+      <li class="grid grid-cols-2 gap-x-2 items-center">
+        <span>Encouragement</span>
+        <span class="border-l border-zinc-300 pl-3"><i class="fa-solid fa-thumbs-up"></i></span>
+      </li>
+    </ul>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 0.95rem;"> 
+The IMPROVE skill helps make distressing situations more manageable by encouraging you to take intentional, 
+positive actions that enhance your experience of the present moment. 
+Each letter in IMPROVE stands for a strategy to shift your mindset or environment in a helpful way, 
+from using imagery, to finding meaning, to turning to prayer, taking a brief break, 
+focusing on one thing at a time, imagining a vacation, or offering yourself encouragement.
+</div>`
+    },
+            {
+      quizFront: `<div class="text-[1rem] leading-[1.05] flex justify-center">
+  <div class="w-full max-w-md pt-0 mt-[-1.75rem]">
+    <ul class="space-y-0 mt-[-0.25rem]">
+     <p class="mb-0 text-center font-medium text-[1rem] leading-snug mt-[-0.75rem]">
+      <strong>True or False:</strong>
+    </p>
+      <li>Half Smile means forcing a big, cheerful grin.</li>
+      <li>Willing Hands involves turning your palms upward.</li>
+      <li>You can use these skills even if you don’t feel calm yet.</li>
+      <li>These skills are used to signal openness and reduce resistance.</li>
+    </ul>
+  </div>
+</div>
+`,
+      quizTitle: "Half Smile and Willing Hands Quiz",
+      studyTitle: "Half Smile and Willing Hands",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-face-smile magic-icon trail-icon"></i>
+          <i class="fa-solid fa-hands-holding magic-icon revealed-icon"></i>
+          </div>
+          <p>\n shift your body, soothe your mind.</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-[1.05] flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-1 mt-[-0.25rem]">
+        <p class="mb-0 text-center font-medium text-[1rem] leading-snug">
+      <strong>Answers:</strong>
+    </p>
+      <li>❌ False – Half Smile means a subtle, relaxed expression.</li>
+      <li>✅ True – Willing Hands involves open palms facing up or outward.</li>
+      <li>✅ True – You don’t have to feel calm to begin using these skills.</li>
+      <li>✅ True – These skills help reduce resistance by shifting posture.</li>
+    </ul>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.5rem;"> 
+Half Smile and Willing Hands use small physical gestures, like softening your face or opening your palms, 
+to help calm intense emotions and signal openness to your brain and body.
+</div>`
+    },
+     {
+      quizFront: "What are four possible steps to observe your thoughts mindfully?",
+      quizTitle: "Mindful of current thoughts Quiz",
+      studyTitle: "Mindful of current thoughts",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-eye magic-icon trail-icon"></i>
+          <i class="fa-solid fa-comment-dots magic-icon revealed-icon"></i>
+          </div>
+          <p>\n see it for what it is, just a thought</p>
+          `,
+      quizBack: `<div class="card-content quiz-card" style="font-size: 0.95rem;"> 
+1.) Relax your mind and body with a deep inhale
+
+2.) Notice what thoughts are currently on your mind
+
+3.) Observe the thoughts and ask questions like:
+ • When did this thought arise?
+ • What was I thinking or doing when I had it?
+
+4.) Allow the thoughts to pass through without reacting
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.5rem;"> 
+Mindful of Current Thoughts is the practice of observing your thoughts as they come and go,
+without judgment, avoidance, or over-identifying with them.
+You learn to notice them, explore them, and let them pass through your mind.
+</div>`
+    },   
+       {
+      quizFront: "What are the potential pros and cons of acting *and* not acting on an urge?",
+      quizTitle: "Pros and Cons Quiz",
+      studyTitle: "Pros and Cons",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-scale-unbalanced magic-icon trail-icon"></i>
+          <i class="fa-solid fa-list-check magic-icon revealed-icon"></i>
+          </div>
+          <p>\n weigh the outcomes, check your choices</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-tight">
+  <ol class="list-decimal list-inside space-y-1">
+    <li><strong>Pros of acting:</strong> Immediate relief or satisfaction</li>
+    <li><strong>Cons of acting:</strong> Long-term regret or harm</li>
+    <li><strong>Pros of not acting:</strong> Builds self-control and reduces damage</li>
+    <li><strong>Cons of not acting:</strong> Discomfort or distress in the moment</li>
+  </ol>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.5rem;"> 
+The Pros and Cons skill helps you slow down and make thoughtful choices 
+by weighing the benefits and drawbacks of acting on an urge versus not acting. 
+It can prevent impulsive decisions and keep you focused on long-term goals.
+</div>`
+    },
+        {
+      quizFront: `<div class="text-[1.2rem] leading-[1.3] text-center">
+  Sort each statement as either <strong>Acceptance</strong> or <strong>Denial</strong>:<br><br>
+   “This shouldn’t be happening to me.”<br>
+   “I don’t like this, but I can’t change it right now.”<br>
+   “If I ignore it, maybe it’ll go away.”<br>
+   “This is painful, but it’s happening.”
+</div>
+`,
+      quizTitle: "Radical Acceptance Quiz",
+      studyTitle: "Radical Acceptance",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-square-root-variable magic-icon trail-icon"></i>
+          <i class="fa-solid fa-dove magic-icon revealed-icon"></i>
+          </div>
+          <p>\n root into truth, rise into peace</p>
+          `,
+      quizBack: `Acceptance:
+  “I don’t like this, but I can’t change it right now.”
+  “This is painful, but it’s happening.”
+
+Denial:
+  “This shouldn’t be happening to me.”
+  “If I ignore it, maybe it’ll go away.”
+
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.5rem;"> 
+Radical Acceptance means fully accepting reality as it is, 
+including all thoughts, feelings, and experiences, even when they are painful or uncomfortable. 
+It’s about letting go of resistance and choosing to face the moment without judgment or denial.
+</div>`
+    },
+        {
+      quizFront: `<div class="text-[1rem] leading-[1.05] flex justify-center">
+  <div class="w-full max-w-md text-center">
+    <p class="mb-3 font-medium text-[0.9rem] leading-snug">
+      <strong>Match each sense to a soothing item:</strong>
+    </p>
+    <div class="grid grid-cols-2 gap-4 text-3xl">
+      <!-- Left Column: Senses -->
+      <div class="flex flex-col items-center gap-3">
+        <span>👃</span>
+        <span>👂</span>
+        <span>👅</span>
+        <span>👁️</span>
+        <span>🤲</span>
+      </div>
+
+      <!-- Right Column: Soothing items (jumbled) -->
+      <div class="flex flex-col items-center gap-3">
+        <span>🎧</span>   <!-- Hearing -->
+        <span>🧸</span>   <!-- Touch -->
+        <span>🕯️</span>   <!-- Smell -->
+        <span>🖼️</span>   <!-- Sight -->
+        <span>🍬</span>   <!-- Taste -->
+      </div>
+    </div>
+  </div>
+</div>
+`,
+      quizTitle: "Self-soothe Quiz",
+      studyTitle: "Self-soothe",
+      studyFront:  `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-person-walking-arrow-loop-left magic-icon trail-icon"></i>
+          <i class="fa-solid fa-mug-hot magic-icon revealed-icon"></i>
+          </div>
+          <p>\n circle back to calm, one sense at a time</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-[1.05] flex justify-center">
+  <div class="w-full max-w-md text-center">
+    <p class="mb-3 font-medium text-[0.9rem] leading-snug">
+      <strong>Answer Key:</strong>
+    </p>
+    <div class="grid grid-cols-2 gap-4 text-3xl">
+      <!-- Left Column: Senses -->
+      <div class="flex flex-col items-center gap-3">
+        <span>👃</span>
+        <span>👂</span>
+        <span>👅</span>
+        <span>👁️</span>
+        <span>🤲</span>
+      </div>
+
+      <!-- Right Column: Matched items -->
+      <div class="flex flex-col items-center gap-3">
+        <span>🕯️</span>   <!-- Smell -->
+        <span>🎧</span>   <!-- Hearing -->
+        <span>🍬</span>   <!-- Taste -->
+        <span>🖼️</span>   <!-- Sight -->
+        <span>🧸</span>   <!-- Touch -->
+      </div>
+    </div>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.5rem;"> 
+The Self-soothe skill helps you manage intense emotions by engaging your five senses. 
+By focusing on comforting sights, sounds, smells, tastes, or textures, 
+you can ground yourself in the present and create moments of calm during distress.
+</div>`
     },
     {
-      quizFront: "What does TIP stand for?",
-      quizTitle: "TIP Skill Quiz",
-      studyTitle: "TIP Skill",
-      studyFront: "",
-      quizBack: "🌡️ Temperature\n🏃 Intense Exercise\n🧘 Paced Breathing",
-      studyBack: "Skill to quickly calm down intense emotions"
+      quizFront: `<div class="text-[1.3rem] leading-[1.2] flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="mt-0 space-y-0">
+        <p class="mb-0 text-center font-medium text-[0.95rem] leading-snug">
+      <strong>Put the STOP steps in the correct order:</strong>
+    </p>
+      <li>🚶 Take a step back</li>
+      <li>🎯 Proceed Mindfully</li>
+      <li>🛑 Stop</li>
+      <li>👀 Observe\n</li>
+    </ul>
+  </div>
+</div>
+`,
+      quizTitle: "STOP Skill Quiz",
+      studyTitle: "STOP Skill",
+      studyFront:  `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-person-circle-exclamation magic-icon trail-icon"></i>
+          <i class="fa-solid fa-person-walking magic-icon revealed-icon"></i>
+          </div>
+          <p>\n pause, then proceed with purpose</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-[1.2] flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="text-center font-medium text-[1.2rem] leading-snug">
+      ✅ Correct order: 
+      Stop → 
+      Take a step back → 
+      Observe → 
+      Proceed mindfully
+    </p>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 0.9rem;"> 
+The STOP skill helps you interrupt impulsive or emotion-driven reactions in moments of distress.
+S – Stop what you're doing. Freeze your body. Don’t react.
+T – Take a step back—breathe, leave the situation if needed.
+O – Observe what’s happening inside and around you. What are your thoughts, feelings, and urges?
+P – Proceed mindfully by choosing a response that aligns with your goals and values, not just your emotions.
+
+Use this skill when you're about to act on strong feelings and need to regain control before making things worse.
+</div>`
+    },
+    {
+      quizFront: `<div class="card-content quiz-card" style="font-size: 1rem;">
+     💡 Which situation is the best match for using the TIPP skill?
+
+      1.) You feel overwhelmed and panicked after receiving upsetting news.
+
+      2.) You’re unsure whether to take a new job offer or stay in your current one.
+
+      3.) You’re sad because your friend forgot your birthday.
+
+      4.) You’re bored and restless at home.
+      </div>`,
+      quizTitle: "TIPP Quiz",
+      studyTitle: "TIPP",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-temperature-half magic-icon trail-icon"></i>
+          <i class="fa-solid fa-lungs magic-icon revealed-icon"></i>
+          </div>
+          <p>\n regulate first, respond next</p>
+          `,
+      quizBack: ` <div class="card-content quiz-card" style="font-size: 1.5rem;"> 
+✅ Correct Answer: #1
+TIPP is used to regulate intense physiological activation (like panic, anxiety, or emotional flooding).
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 0.7rem;"> 
+The TIPP skills are designed to help you quickly reduce overwhelming emotions by targeting your body’s physical response. When your emotions are intense, your nervous system is often in overdrive. TIPP helps regulate that through:
+
+Temperature: Using cold (like ice packs or cold water) to lower your heart rate and shock your system into the present moment.
+
+Intense Exercise: Brief bursts of movement (like running in place or jumping jacks) can release adrenaline and restore balance.
+
+Paced Breathing: Slowing your breath helps calm the body and signals safety to your brain.
+
+Progressive Muscle Relaxation: Tensing and releasing muscles helps discharge physical tension and promote a sense of calm.
+
+These techniques work by shifting your body out of a state of alarm and into one where you can think more clearly and act with intention.
+</div>`
+    },
+        {
+      quizFront: `<div class="card-content quiz-card" style="font-size: 1rem;">
+
+     🔄 One of these does NOT reflect the Turning the Mind skill:
+
+      A) Noticing internal resistance
+
+      B) Making an internal commitment to accept
+
+      C) Changing the situation as quickly as possible
+
+      D) Repeating your decision to accept, even if feelings return
+
+      </div>`,
+      quizTitle: "Turning the mind Quiz",
+      studyTitle: "Turning the mind",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-arrows-spin magic-icon trail-icon"></i>
+          <i class="fa-solid fa-lightbulb magic-icon revealed-icon"></i>
+          </div>
+          <p>\n turn back to insight, again and again</p>
+          `,
+      quizBack: ` <div class="card-content quiz-card" style="font-size: 1.5rem;"> 
+✅ Correct Answer: C
+Turning the Mind isn’t about changing the situation,
+it’s about repeatedly choosing to accept what’s already happening, even when it’s hard.
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 0.9rem;"> 
+Turning the Mind is a skill that helps individuals accept reality by making an intentional and repeated commitment to acceptance.
+It begins with noticing the internal conflict between rejecting reality and choosing to accept it. 
+Once aware, you make an inner commitment to accept what is, even if you do not like it. 
+This decision often has to be made again and again, like turning the mind toward a different road each time you start to veer off. 
+Over time, by recognizing your resistance and gently redirecting yourself back to acceptance, you reduce suffering and regain a sense of peace.
+</div>`
+    },
+        {
+      quizFront: `<div class="card-content quiz-card" style="font-size: 1.3rem;">
+
+Fill in the blank:
+Willfulness is often driven by ____, while willingness is guided by ____.
+
+A) control · resistance
+B) fear · anger
+C) resentment · rigidity
+D) resistance · openness
+
+
+      </div>`,
+      quizTitle: "Willingness Quiz",
+      studyTitle: "Willingness",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-arrows-to-eye magic-icon trail-icon"></i>
+          <i class="fa-solid fa-person-rays magic-icon revealed-icon"></i>
+          </div>
+          <p>\n notice what is, open to what comes</p>
+          `,
+      quizBack: ` <div class="card-content quiz-card" style="font-size: 1.5rem;"> 
+✅ Correct Answer: D)
+resistance · openness
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+The Willingness skill is about approaching life with openness, flexibility, and acceptance. 
+It is the opposite of willfulness, which is a rigid and resistant mindset that clings to control and rejects change. 
+Willingness means choosing to work with reality, especially when you'd rather push it away.
+</div>`
     }
   ],
   interpersonal: [
