@@ -483,7 +483,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: cardZoomSpin 1.5s ease forwards;
+  animation: cardZoomSpin 2.5s ease forwards;
 }
 
 

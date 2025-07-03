@@ -1473,6 +1473,7 @@ function attachIconRevealListeners() {
 }
 
 
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
-};
+});
+
