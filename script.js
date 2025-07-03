@@ -23,11 +23,21 @@ window.addEventListener('mousemove', () => {
 // Mode toggle logic
 let currentMode = 'study';
 
-document.getElementById('modeToggle').addEventListener('click', () => {
+function updateModeToggleButtons() {
+  const label = `Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}`;
+  document.getElementById('modeToggle').textContent = label;
+  document.getElementById('modeToggleBottom').textContent = label;
+}
+
+function toggleMode() {
   currentMode = currentMode === 'quiz' ? 'study' : 'quiz';
-  document.getElementById('modeToggle').textContent = `Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)}`;
+  updateModeToggleButtons();
   Object.keys(cardsByCategory).forEach(renderDeck);
-});
+}
+
+document.getElementById('modeToggle').addEventListener('click', toggleMode);
+document.getElementById('modeToggleBottom').addEventListener('click', toggleMode);
+
 
 // Card structure
 const cardsByCategory = {
@@ -817,20 +827,387 @@ Willingness means choosing to work with reality, especially when you'd rather pu
       studyBack: "improve the way we communicate with others by emphasizing empathy, kindness, setting boundaries, assertiveness, active listening, mutual respect, understanding, and emotional expression"
     },
     {
-      quizFront: "What does DEAR MAN stand for?",
+      quizFront: `<div class="text-[0.65rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-0 mt-0">
+      <li><strong>Sort the responses: Which ones follow THINK?</strong>
+      \nMatch each phrase to <strong>🧠 Mindful (THINK)</strong> or <strong>🚫 Not Mindful</strong>.</li>
+      <li>“Whatever, I don’t care.”</li>
+      <li>“There’s more than one way to see this.”</li>
+      <li>“You always act like this!”</li>
+      <li>“You have your reasons and I want to understand.”</li>
+      <li>“I’m going to pause and think this through.”</li>
+      <li>“This is stupid. I don’t need to explain myself.”</li>
+      <li>"I care about how this affects you.”</li>
+      <li>“I respect your opinion, even if I disagree.”</li>
+      <li>"You’re wrong and I’m done listening.”</li>
+    </ul>
+  </div>
+</div>
+`,
+      quizTitle: "THINK Quiz",
+      studyTitle: "THINK",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-gears magic-icon trail-icon"></i>
+          <i class="fa-solid fa-users-gear magic-icon revealed-icon"></i>
+          </div>
+          <p>\n mindful thinking, compassionate communication</p>
+          `,
+      quizBack: `<div class="text-[0.9rem] leading-tight flex justify-center overflow-y-auto min-h-[170px] max-h-[250px] px-1">
+  <div class="w-full max-w-md">
+    <ul class="space-y-1 mt-1">
+        <p class="mb-1 text-center font-medium text-[0.8rem] leading-snug">
+      <strong>✔️ Answers with THINK letters:</strong>
+    </p>
+      <li><strong>🧠 “I’m going to pause and think this through.”</strong> — T: Think before you speak</li>
+      <li><strong>🧠 “You have your reasons and I want to understand.”</strong> — H: Have empathy</li>
+      <li><strong>🧠 “There’s more than one way to see this.”</strong> — I: Interpretations matter</li>
+      <li><strong>🧠 “I respect your opinion, even if I disagree.”</strong> — N: Negotiate fairly</li>
+      <li><strong>🧠 “I care about how this affects you.”</strong> — K: Kindness</li>
+      <li><strong>🚫 “You’re wrong and I’m done listening.”</strong> — reactive, not empathetic</li>
+      <li><strong>🚫 “This is stupid. I don’t need to explain myself.”</strong> — dismissive, unkind</li>
+      <li><strong>🚫 “Whatever, I don’t care.”</strong> — dismissive, lacking empathy</li>
+      <li><strong>🚫 “You always act like this!”</strong> —  accusatory, lacks objectivity</li>
+
+    </ul>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+The THINK (Think, Have Empathy, Interpretations, Notice, Kindness) approach is a mindful way to handle conflict 
+by grounding yourself in logic, empathy, and compassion. 
+It helps you pause before reacting, challenge assumptions, 
+and consider the other person’s perspective so you can respond with clarity and respect.
+</div>`
+    },  
+    {
+      quizFront: `<div class="text-[0.9rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-1 mt-1">
+        <p class="mb-2 text-center font-medium text-[0.8rem] leading-snug">
+      <strong> 🤝 What is DEAR MAN used for?</strong>
+    </p>
+      <li>A. Maintaining self-respect in conversations</li>
+      <li>B. Keeping others' perspectives in mind</li>
+      <li>C. Assertively asking for what you want or saying no</li>
+      <li>D. Strengthening relationships through warmth and empathy</li>
+    </ul>
+  </div>
+</div>`,
       quizTitle: "DEAR MAN Quiz",
       studyTitle: "DEAR MAN",
-      studyFront: "",
-      quizBack: "📣 Describe\n❤️ Express\n✅ Assert\n🎁 Reinforce\n🧘 Mindful\n🧍 Appear Confident\n🤝 Negotiate",
-      studyBack: "Skill to ask for what you want or say no effectively"
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-person-circle-question magic-icon trail-icon"></i>
+          <i class="fa-solid fa-handshake magic-icon revealed-icon"></i>
+          </div>
+          <p>\n ask clearly, connect confidently</p>
+          `,
+      quizBack: `<div class="text-[0.9rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center font-medium text-[0.85rem] leading-snug">
+      <strong>✔️ Correct answer: C</strong><br/>
+      <strong>DEAR MAN</strong> helps you ask for what you want or say no while staying respectful and clear. 
+    </p>
+    <p class="mt-2 text-[0.8rem] leading-tight text-zinc-600">
+      A = FAST (self-respect) • B = THINK (perspective-taking) • D = GIVE (relationship strength)
+    </p>
+  </div>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+DEAR MAN is a skill for assertively asking for what you want or saying no while maintaining self-respect and relationships. 
+It stands for Describe, Express, Assert, Reinforce, stay Mindful, Appear confident, and Negotiate.
+It guides you to communicate clearly and effectively, even in difficult conversations.
+</div>`
+    },
+        {
+      quizFront: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-1 text-center font-medium text-[0.85rem] leading-snug">
+      <strong>Fill in the blank:</strong>
+    </p>
+    <p class="text-center">
+      Dialectical thinking helps you find the <strong>________</strong> path between two extremes.
+    </p>
+  </div>
+</div>
+`,
+      quizTitle: "Dialectics Quiz",
+      studyTitle: "Dialectics",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-down-left-and-up-right-to-center magic-icon trail-icon"></i>
+          <i class="fa-solid fa-up-down magic-icon revealed-icon"></i>
+          </div>
+          <p>\n opposing thoughts can co-exist</p>
+          `,
+      quizBack: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-1 text-center font-medium text-[0.785rem] leading-snug">
+      <strong>Answer:</strong>
+    </p>
+    <p class="text-center">
+      <strong>Middle</strong> — DBT encourages walking the middle path when faced with conflicting ideas or emotions.
+    </p>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+Dialectics is the practice of recognizing that two opposing ideas can both be true at the same time. 
+Instead of choosing one side, it encourages seeing multiple perspectives, finding balance, 
+and moving forward with openness and flexibility.
+</div>`
+    },
+            {
+      quizFront: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-0 mt-0">
+        <li class="mb-0 text-center font-medium text-[0.85rem] leading-snug">
+      <strong>Sort the Situations:</strong><br />
+      Match each one to <strong>Build</strong>, <strong>Improve</strong>, or <strong>End</strong> a relationship.
+    </li>
+      <li>💬 “You apologize after a misunderstanding with a friend.”</li>
+      <li>🚫 “You block someone who keeps violating your boundaries.”</li>
+      <li>👋 “You introduce yourself to someone new at a support group.”</li>
+    </ul>
+  </div>
+</div>`
+,
+      quizTitle: "Building, Improving, and Ending Relationships Quiz",
+      studyTitle: "Building, Improving and Ending Relationships",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-wrench magic-icon trail-icon"></i>
+          <i class="fa-solid fa-people-arrows magic-icon revealed-icon"></i>
+          </div>
+          <p>\n tools for starting, sustaining, or saying goodbye</p>
+          `,
+      quizBack: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-1 mt-1">
+        <li class="mb-1 text-center font-medium text-[0.85rem] leading-snug">
+      <strong>✔️ Answer Key:</strong>
+    </li>
+      <li><strong>👋 “You introduce yourself to someone new at a support group.”</strong> — <em>Build</em></li>
+      <li><strong>💬 “You apologize after a misunderstanding with a friend.”</strong> — <em>Improve</em></li>
+      <li><strong>🚫 “You block someone who keeps violating your boundaries.”</strong> — <em>End</em></li>
+    </ul>
+  </div>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+The skills for building, improving, and ending relationships are deeply connected and often rely on similar tools. 
+By applying other DBT strategies, you can form healthy relationships, strengthen meaningful ones, 
+and step away from harmful connections when needed.
+</div>`
     },
     {
-      quizFront: "What is GIVE used for?",
+      quizFront: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-1 mt-1">
+        <p class="mb-2 text-center font-medium text-[0.85rem] leading-snug">
+      <strong>FAST is most helpful when you want to:</strong>
+    </p>
+      <li>A. Convince someone to change their mind</li>
+      <li>B. Express emotions in a dramatic way</li>
+      <li>C. Stand up for yourself without damaging your self-respect</li>
+      <li>D. Avoid conflict at all costs</li>
+    </ul>
+  </div>
+</div>
+`,
+      quizTitle: "FAST Quiz",
+      studyTitle: "FAST",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-user-shield magic-icon trail-icon"></i>
+          <i class="fa-solid fa-scale-balanced magic-icon revealed-icon"></i>
+          </div>
+          <p>\n stand firm, speak fair</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-1 text-center font-medium text-[1rem] leading-snug">
+      <strong>✔️ Correct Answer: C</strong>
+  
+      \nFAST helps you be <strong>Fair</strong>, <strong>avoid unnecessary Apologies</strong>, <strong>Stick to your values</strong>, and stay <strong>Truthful</strong>, especially when setting boundaries or saying no.
+    </p>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+The FAST skill helps you maintain self-respect in relationships by encouraging you to be Fair, avoid Apologizing unnecessarily, Stick to your values, and be Truthful. 
+It’s useful when saying no, setting boundaries, or expressing your needs while still being respectful to yourself and others.
+</div>`
+    },
+    {
+      quizFront: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-1 mt-1">
+        <p class="mb-2 text-center font-medium text-[0.9rem] leading-snug">
+      <strong>🤝 Match each behavior to the correct GIVE skill:</strong>
+    </p>
+      <li>👀 “Tell me more about what happened.”</li>
+      <li>😌 “I tried to keep it light and easygoing.”</li>
+      <li>✅ “That makes sense. I get why you felt that way.”</li>
+      <li>🫶 “I care about your feelings.”</li>
+    </ul>
+  </div>
+</div>
+`,
       quizTitle: "GIVE Quiz",
       studyTitle: "GIVE",
-      studyFront: "",
-      quizBack: "G: Gentle\nI: Interested\nV: Validate\nE: Easy manner",
-      studyBack: "Skill for maintaining relationships with kindness and presence"
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-comments magic-icon trail-icon"></i>
+          <i class="fa-solid fa-people-carry-box magic-icon revealed-icon"></i>
+          </div>
+          <p>\n let your words hold care</p>
+          `,
+      quizBack: `<div class="text-[0.9rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-1 mt-1">
+        <p class="mb-1 text-center font-medium text-[0.85rem] leading-snug">
+      <strong>✔️ Matching Answers:</strong>
+    </p>
+      <li>🫶 Gentle: “I care about your feelings.”</li>
+      <li>👀 Interest: “Tell me more about what happened.”</li>
+      <li>✅ Validation: “That makes sense. I get why you felt that way.”</li>
+      <li>😌 Easy Manner: “I tried to keep it light and easygoing.”</li>
+    </ul>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+The GIVE skill focuses on nurturing relationships through warmth, attentiveness, and respect. 
+By being gentle, showing genuine interest, validating the other person’s feelings, and maintaining an easygoing presence, 
+you help strengthen trust and keep the connection positive even during tough conversations.
+</div>`
+    },
+    {
+      quizFront: `<div class="text-[1.2rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center font-medium text-[1.2rem] leading-snug">
+      <strong>📝 Fill in the blank:</strong><br />
+      Modulating intensity means adjusting your ________ to match the situation and your goal.
+    </p>
+  </div>
+</div>
+`,
+      quizTitle: "Modulate Intensity Quiz",
+      studyTitle: "Modulate Intensity",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-gauge magic-icon trail-icon"></i>
+          <i class="fa-solid fa-signal magic-icon revealed-icon"></i>
+          </div>
+          <p>\n adjust your tone to match your goal</p>
+          `,
+      quizBack: `<div class="text-[1.2rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-1 text-center font-medium text-[1.2rem] leading-snug">
+      <strong>✔️ Answer:</strong>
+  
+      \n<strong>expression or emotional response</strong><br />
+      (This could include your tone, volume, posture, or wording—anything that shapes how your message comes across.)
+    </p>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+Modulating intensity means adjusting the strength of your emotional expression to match the situation and your communication goals. 
+Rather than overreacting or shutting down, you learn to fine-tune your words, tone, 
+and body language so your message is received clearly and respectfully. 
+This helps prevent misunderstandings and supports more effective interpersonal interactions.
+</div>`
+    },
+    {
+      quizFront: `<div class="text-[0.75rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-2 mt-2">
+      <p class="mb-2 text-center font-medium text-[0.75rem] leading-snug">
+      <strong>🎯 Which type of effectiveness is being prioritized?</strong>
+    </p>
+      <li>1️⃣ You calmly ask for a refund after a service issue, even though you're nervous.<br /><strong>A:</strong> Objectives<br /><strong>B:</strong> Relationship<br /><strong>C:</strong> Self-Respect</li>
+      <li>2️⃣ You choose not to argue during a heated moment to avoid hurting the other person.<br /><strong>A:</strong> Objectives<br /><strong>B:</strong> Relationship<br /><strong>C:</strong> Self-Respect</li>
+      <li>3️⃣ You say no to a friend’s request because it goes against your values.<br /><strong>A:</strong> Objectives<br /><strong>B:</strong> Relationship<br /><strong>C:</strong> Self-Respect</li>
+    </ul>
+  </div>
+</div>
+`,
+      quizTitle: "Prioritize Goals Quiz",
+      studyTitle: "Prioritize Goals",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-sliders magic-icon trail-icon"></i>
+          <i class="fa-solid fa-flag-checkered magic-icon revealed-icon"></i>
+          </div>
+          <p>\n shift your approach to reach your goal</p>
+          `,
+      quizBack: `<div class="text-[0.8rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-1 mt-1">
+        <p class="mb-1 text-center font-medium text-[0.75rem] leading-snug">
+      <strong>✔️ Answer Key:</strong>
+    </p>
+      <li>1️⃣ <strong>Objectives:</strong> You’re focused on getting a specific outcome (the refund)</li>
+      <li>2️⃣ <strong>Relationship:</strong> You're choosing connection over being right</li>
+      <li>3️⃣ <strong>Self-Respect:</strong>  You’re acting in line with your values, even if it's uncomfortable</li>
+    </ul>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+The Prioritize Goals skill helps you decide what matters most in a conversation by focusing on three types of effectiveness: 
+Objectives (getting what you want), Relationship (protecting the connection), and Self-Respect (staying true to your values). 
+It helps you communicate clearly and act with intention.
+</div>`
+    },
+        {
+      quizFront: `<div class="text-[0.85rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-0 mt-0">
+      <p class="mb-0 text-center font-medium text-[0.75rem] leading-snug">
+      <strong>🤝 Match each response: Validating or Invalidating?</strong>
+    </p>
+      <li>💬 “It makes sense you’d feel overwhelmed.”</li>
+      <li>💬 “You’re being dramatic, it’s not that bad.”</li>
+      <li>💬 “I get why that would upset you.”</li>
+      <li>💬 “That’s not how it happened at all.”</li>
+      <li>💬 “I hear you. That must’ve been hard.”</li>
+    </ul>
+  </div>
+</div>
+`,
+      quizTitle: "Validation Quiz",
+      studyTitle: "Validation",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-check-double magic-icon trail-icon"></i>
+          <i class="fa-solid fa-handshake-angle magic-icon revealed-icon"></i>
+          </div>
+          <p>\n honor their experience, strengthen the bond</p>
+          `,
+      quizBack: `<div class="text-[0.8rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-0 mt-0">
+        <p class="mb-1 text-center font-medium text-[0.75rem] leading-snug">
+      <strong>✔️ Answers:</strong>
+    </p>
+      <li><strong>“It makes sense you’d feel overwhelmed.”</strong> — ✅ Validating</li>
+      <li><strong>“You’re being dramatic, it’s not that bad.”</strong> — ❌ Invalidating</li>
+      <li><strong>“I get why that would upset you.”</strong> — ✅ Validating</li>
+      <li><strong>“That’s not how it happened at all.”</strong> — ❌ Invalidating</li>
+      <li><strong>“I hear you. That must’ve been hard.”</strong> — ✅ Validating</li>
+    </ul>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+Validation is the practice of acknowledging and accepting another person’s thoughts, feelings, or experiences without judgment. 
+It does not mean agreeing or approving, but rather recognizing the internal logic or emotional truth behind their perspective. 
+Through validation, we communicate respect, foster emotional safety, and strengthen relationships.
+</div>`
     }
   ],
   mindfulness: [
