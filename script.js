@@ -45,7 +45,7 @@ const cardsByCategory = {
     {
       quizFront: "What is Emotional Regulation and why is it important?",
       quizTitle: "Emotional Regulation Quiz",
-      studyTitle: "",
+      studyTitle: "⚡🫙",
       studyFront: generateStackedCardContent('assets/images/emotionalregulation.png', 'Emotional Regulation'),
       quizBack: "It’s the ability to manage your emotions instead of being controlled by them.\nIt matters because it helps you stay calm, think clearly, and act in ways you won’t regret.",
       studyBack: "the process of identifying and managing emotions in a constructive and healthy way"
@@ -294,7 +294,7 @@ quizBack: `<div class="activity-wrapper">
     {
       quizFront: "What is Distress Tolerance and why is it important?",
       quizTitle: "Distress Tolerance Quiz",
-      studyTitle: "",
+      studyTitle: "☔🌱",
       studyFront: generateStackedCardContent('assets/images/distresstolerance.png', 'Distress Tolerance'),
       quizBack: "It helps you survive emotional crises without making things worse.\nIt’s important for staying safe and grounded when emotions feel overwhelming.",
       studyBack: "calmly and successfully navigate difficult or stressful situations without resorting to destructive or self-defeating behaviors"
@@ -821,7 +821,7 @@ Willingness means choosing to work with reality, especially when you'd rather pu
     {
       quizFront: "What is Interpersonal Effectiveness and why is it important?",
       quizTitle: "Interpersonal Effectiveness Quiz",
-      studyTitle: "",
+      studyTitle: "🌲↔️🌳",
       studyFront: generateStackedCardContent('assets/images/interpersonaleffectiveness.png', 'Interpersonal Effectiveness'),
       quizBack: "It means getting your needs met while keeping relationships healthy. \nIt’s important for setting boundaries, asking for help, and maintaining mutual respect.",
       studyBack: "improve the way we communicate with others by emphasizing empathy, kindness, setting boundaries, assertiveness, active listening, mutual respect, understanding, and emotional expression"
@@ -1214,27 +1214,266 @@ Through validation, we communicate respect, foster emotional safety, and strengt
     {
       quizFront: "What is Mindfulness and why is it important?",
       quizTitle: "Mindfulness Quiz",
-      studyTitle: "",
+      studyTitle: "🪷💧",
       studyFront: generateStackedCardContent('assets/images/mindfulness.png', 'Mindfulness'),
       quizBack: "It means being fully present in the moment without judgment. \nIt helps reduce stress, improve focus, and manage emotions more effectively.",
       studyBack: "intentionally attentive to the present moment"
     },
     {
-      quizFront: "What is Wise Mind a combination of?",
+      quizFront: `<div class="text-[1rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="text-center font-medium text-[0.95rem] leading-snug mb-2">
+      🧠 <strong>Before making a big decision, you hear three inner voices:</strong><br>
+ 
+      <strong>One says,</strong> “Just do it. I don’t care what happens.”  
+      \n<strong>Another says,</strong> “I hear your fears, but I also know what matters most right now.”  
+      \n<strong>A third says,</strong> “Stick to the facts. Be logical.”<br>
+
+      Which one is <strong>Wise Mind</strong>? Tap to find out.
+    </p>
+  </div>
+</div>`,
       quizTitle: "Wise Mind Quiz",
       studyTitle: "Wise Mind",
-      studyFront: "",
-      quizBack: "Emotion Mind + Reasonable Mind\n🧠 Your inner balance",
-      studyBack: "The balanced state between emotion and logic"
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-star-half-stroke magic-icon trail-icon"></i>
+          <i class="fa-solid fa-atom magic-icon revealed-icon"></i>
+          </div>
+          <p>\n half instinct + half intellect = fully wise</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="text-center font-medium text-[1rem] leading-snug mb-2">
+      ✅ <strong>The second voice is Wise Mind.</strong><br>
+      It honors both emotion and logic, helping you act with calm inner clarity, and neither impulsivity nor rigidness.
+    </p>
+  </div>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+Wise Mind is the balanced state where emotional mind and rational mind work together. 
+It allows you to respond with clarity and purpose, rather than reacting from impulse or overthinking. 
+Wise Mind helps you stay grounded in the present moment and make choices that reflect both your values and the reality of a situation.
+</div>`
     },
     {
-      quizFront: "What are the three 'What' skills?",
-      quizTitle: "What Skills Quiz",
-      studyTitle: "What Skills",
-      studyFront: "",
-      quizBack: "🔹 Observe\n🔹 Describe\n🔹 Participate",
-      studyBack: "Skills that teach you how to practice mindfulness"
-    }
+      quizFront: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+        <p class="mb-0 text-center text-[0.95rem] leading-snug">
+      📌 \n<strong>You’re in an argument and you know you’re technically right.</strong><br>
+      But standing your ground might escalate things and hurt the relationship. 
+  <em><strong>What’s the most effective thing to do?</strong></em>
+    
+      A. Keep arguing because facts matter more than feelings<br>
+      B. Walk away mid-conversation so you don’t lose your cool<br>
+      C. Stay calm and speak clearly, even if it means letting some things go</p>
+  </div>
+</div>`,
+      quizTitle: "Effective Quiz",
+      studyTitle: "Effective",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-screwdriver-wrench magic-icon trail-icon"></i>
+          <i class="fa-solid fa-check magic-icon revealed-icon"></i>
+          </div>
+          <p>\n practical over perfect</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center text-[1rem] leading-snug">
+      ✅ <strong>Answer:</strong> C is the most effective choice.<br>
+      Being effective means doing what works, and not what is “right,” “fair,” or “deserved.” It means balancing your goals with the reality of the situation.
+    </p>
+  </div>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+Effective means focusing on what actually works in a situation, rather than getting caught up in being right, winning, or proving a point. 
+It’s about choosing actions that move you closer to your goals, even if they don’t feel emotionally satisfying in the moment. 
+Being effective may require compromise, flexibility, and letting go of black-and-white thinking.
+</div>`
+    },
+    {
+      quizFront: `<div class="text-[0.85rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="mt-0 space-y-0  text-[0.95rem] leading-snug">
+        <p class="mb-0 text-center text-[0.95rem] leading-snug">
+     <strong>You suddenly feel tightness in your chest before giving a presentation.</strong><br>
+      <em>What do you do?</em>
+    </p>
+      <li>A. Say nothing and try to ignore it</li>
+      <li>B. Think “This is so stupid, I shouldn’t be nervous”</li>
+      <li>C. Notice the feeling and say to yourself, “My chest feels tight and I feel nervous”</li>
+    </ul>
+  </div>
+</div>`,
+      quizTitle: "Describe Quiz",
+      studyTitle: "Describe",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-file-pen magic-icon trail-icon"></i>
+          <i class="fa-solid fa-file-lines magic-icon revealed-icon"></i>
+          </div>
+          <p>\n write the facts, not the feelings</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center text-[1rem] leading-snug">
+      ✅ <strong>Answer:</strong> C is using the skill of <em>Describe</em>.
+      \nYou're labeling your experience in words with just the facts, and without judgment. This helps you stay mindful and present.
+    </p>
+  </div>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+To describe mindfully means putting your observations into words without interpretation, exaggeration, or judgment. 
+You state only what you can see, hear, or sense, much like a reporter or narrator. 
+This helps you stay grounded in reality and prevents emotional reactions from distorting the situation.
+</div>`
+    },
+    {
+      quizFront: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="mt-0 space-y-0 text-[0.85rem] leading-snug">
+        <p class="mb-0 text-center font-medium text-[0.85rem] leading-snug">
+      🚫⚖️ \n<strong>Which of the following best shows a \nnon-judgmental attitude?</strong>
+    </p>
+      <li>A. “I shouldn’t feel this way, it’s stupid.”</li>
+      <li>B. “This is just how I feel right now.”</li>
+      <li>C. “That thought was bad and needs to stop.”</li>
+      <li>D. “This is the worst day ever and it’s all my fault.”</li>
+    </ul>
+  </div>
+</div>`,
+      quizTitle: "Non-Judgemental Quiz",
+      studyTitle: "Non-Judgemental",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-ban magic-icon trail-icon"></i>
+          <i class="fa-solid fa-gavel magic-icon revealed-icon"></i>
+          </div>
+          <p>\n drop the gavel, just notice what is</p>
+          `,
+      quizBack: `<div class="text-[0.85rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center font-medium text-[0.95rem] leading-snug">
+      ✅ <strong>Answer:</strong> B. “This is just how I feel right now.”<br>
+      Being non-judgmental means noticing experiences without labeling them as good or bad. You accept what is, without shame or criticism.
+    </p>
+  </div>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+Non-judgmental observation means noticing your thoughts, feelings, and experiences without labeling them as good, bad, right, or wrong. 
+It’s about describing what’s happening with neutral language and letting go of evaluations, blame, or assumptions. 
+This helps reduce emotional reactivity and supports clearer thinking and mindfulness.
+</div>`
+    },
+    {
+      quizFront: `<div class="text-[1.2rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center font-medium text-[1rem] leading-snug">
+      👁️ \n<strong>Fill in the blank:</strong><br>
+      The skill of <strong>Observe</strong> means to __________ your thoughts, feelings, and surroundings without getting caught up in them.
+    </p>
+  </div>
+</div>`,
+      quizTitle: "Observe Quiz",
+      studyTitle: "Observe",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-binoculars magic-icon trail-icon"></i>
+          <i class="fa-solid fa-magnifying-glass-location magic-icon revealed-icon"></i>
+          </div>
+          <p>\n notice what's there, inside and out</p>
+          `,
+      quizBack: `<div class="text-[1.2rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center font-medium text-[1rem] leading-snug">
+      ✅ <strong>Answer:</strong> <em>notice</em><br>
+      Observe is about simply noticing what’s happening, without labeling, analyzing, or reacting. Just let it come and go.
+    </p>
+  </div>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+The Observe skill encourages you to notice internal and external experiences without immediately reacting. 
+This includes observing your thoughts, emotions, body sensations, urges, and what is happening around you. 
+You are not trying to label, analyze, or change anything. Just stay present and aware like a curious witness to the moment.
+</div>`
+    },
+    {
+      quizFront: `<div class="text-[1.2rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center font-medium text-[1rem] leading-snug">
+      <strong>🧘‍♀️ \nTrue or False:</strong><br>
+      You are practicing One-Mindfully if you’re doing one thing while thinking about something else entirely.
+    </p>
+  </div>
+</div>`,
+      quizTitle: "One-Mindfully Quiz",
+      studyTitle: "One-Mindfully",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-spa magic-icon trail-icon"></i>
+          <i class="fa-solid fa-heart-circle-bolt magic-icon revealed-icon"></i>
+          </div>
+          <p>\n single focus, full heart</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center font-medium text-[1rem] leading-snug">
+      ❌ <strong>False.</strong> 
+      \nOne-Mindfully means focusing your full attention on <em>one</em> thing at a time. 
+      Thinking about something else while doing a task is the opposite of this skill.
+    </p>
+  </div>
+</div>`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1.2rem;"> 
+The One-Mindfully approach is the practice of focusing your full attention on one task or moment at a time. 
+It means doing things with intention, without distractions, and staying fully present. 
+Whether you are breathing, eating, walking, or speaking, you commit to doing it with your whole mind, 
+rather than splitting your focus or multitasking.
+</div>`
+    },
+    {
+      quizFront: `<div class="text-[0.95rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <ul class="space-y-0 mt-0">
+        <p class="mb-0 text-center font-medium text-[0.85rem] leading-snug">
+      <strong>✋ Which action best represents the skill of Participate?</strong>
+    </p>
+      <li>A. Watching others dance while scrolling your phone</li>
+      <li>B. Mentally rehearsing your next line in a conversation</li>
+      <li>C. Clapping along from your seat but not joining in</li>
+      <li>D. Getting up and joining the dance without overthinking it</li>
+    </ul>
+  </div>
+</div>
+
+`,
+      quizTitle: "Participate Quiz",
+      studyTitle: "Participate",
+      studyFront: `
+          <div class="icon-transform-container">
+          <i class="fa-solid fa-hand-holding-hand magic-icon trail-icon"></i>
+          <i class="fa-solid fa-users-viewfinder magic-icon revealed-icon"></i>
+          </div>
+          <p>\n show up, join in, be seen</p>
+          `,
+      quizBack: `<div class="text-[1rem] leading-tight flex justify-center">
+  <div class="w-full max-w-md">
+    <p class="mb-2 text-center font-medium text-[0.95rem] leading-snug">
+      <strong>✔️ Correct Answer: D</strong>
+      \n Participating means letting go of overthinking and self-consciousness and becoming fully involved in the moment. 
+      You’re not just observing or performing, you're <em>immersed</em>.
+    </p>
+  </div>
+</div>
+`,
+      studyBack: ` <div class="card-content quiz-card" style="font-size: 1rem;"> 
+Participate means throwing yourself fully into the present moment and engaging in activities with openness and involvement. 
+Instead of holding back, overthinking, or staying detached, you allow yourself to fully experience what you are doing. 
+It is about becoming one with the moment, whether that means dancing freely, laughing without self-consciousness, or focusing completely on a task. 
+You let go of judgment and hesitation and take part with your whole self.
+</div>`
+    }      
   ]
 };
 
