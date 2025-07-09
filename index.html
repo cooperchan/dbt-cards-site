@@ -42,33 +42,69 @@
 </div>
 -->
 
+
 <div id="cardIntro"
-     class="fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-[2000ms]"
+     class="fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-opacity duration-[2000ms]"
      style="background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%)">
+
+  <!-- Header Text -->
+  <div class="text-center px-4 mb-6">
+    <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-white drop-shadow-md">
+      🎴 Explore DBT Flashcards Instantly After the Intro Animation
+    </h2>
+    <p class="text-sm sm:text-base text-white opacity-90">
+      No login • Free forever • Tap a deck to begin ➡️
+    </p>
+  </div>
+
+  <!-- Intro Deck Cards -->
   <div class="grid grid-cols-2 md:flex gap-4">
-    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]" loading="eager">
-        <img src="assets/images/emotion-regulation-door.jpg" alt="Door" class="max-h-[90%] max-w-[90%] object-contain">
+
+    <!-- Emotion Regulation -->
+    <div class="intro-card w-[120px] sm:w-[140px] md:w-[180px] h-[200px] sm:h-[220px] md:h-[260px] flex flex-col items-center justify-start p-2 bg-white rounded-xl shadow-md">
+      <div class="text-sm sm:text-base font-semibold text-black text-center mb-[2px]" style="font-family: 'League Spartan', sans-serif;">
+        Emotion <br>Regulation
+      </div>
+      <img src="assets/images/emotion-regulation-door.jpg" alt="Emotion Regulation"
+           class="w-full h-full object-contain">
     </div>
-    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]" loading="eager">
-        <img src="assets/images/distress-tolerance-door.jpg" alt="Door" class="max-h-[90%] max-w-[90%] object-contain">
+
+    <!-- Distress Tolerance -->
+    <div class="intro-card w-[120px] sm:w-[140px] md:w-[180px] h-[200px] sm:h-[220px] md:h-[260px] flex flex-col items-center justify-start p-2 bg-white rounded-xl shadow-md">
+      <div class="text-sm sm:text-base font-semibold text-black text-center mb-[2px]" style="font-family: 'League Spartan', sans-serif;">
+        Distress <br>Tolerance
+      </div>
+      <img src="assets/images/distress-tolerance-door.jpg" alt="Distress Tolerance"
+           class="w-full h-full object-contain">
     </div>
-    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]" loading="eager">
-        <img src="assets/images/interpersonal-effectiveness-door.jpg" alt="Door" class="max-h-[90%] max-w-[90%] object-contain">
+
+    <!-- Interpersonal Effectiveness -->
+    <div class="intro-card w-[120px] sm:w-[140px] md:w-[180px] h-[200px] sm:h-[220px] md:h-[260px] flex flex-col items-center justify-start p-2 bg-white rounded-xl shadow-md">
+      <div class="text-sm sm:text-base font-semibold text-black text-center mb-[2px]" style="font-family: 'League Spartan', sans-serif;">
+        Interpersonal Effectiveness
+      </div>
+      <img src="assets/images/interpersonal-effectiveness-door.jpg" alt="Interpersonal Effectiveness"
+           class="w-full h-full object-contain">
     </div>
-    <div class="intro-card w-[120px] h-[180px] sm:w-[140px] sm:h-[200px] md:w-[180px] md:h-[260px]" loading="eager">
-        <img src="assets/images/mindfulness-door.jpg" alt="Door" class="max-h-[90%] max-w-[90%] object-contain">
+
+    <!-- Mindfulness -->
+    <div class="intro-card w-[120px] sm:w-[140px] md:w-[180px] h-[200px] sm:h-[220px] md:h-[260px] flex flex-col items-center justify-start p-2 bg-white rounded-xl shadow-md">
+      <div class="text-sm sm:text-base font-semibold text-black text-center mb-[2px]" style="font-family: 'League Spartan', sans-serif;">
+        Mindfulness<br><br>
+      </div>
+      <img src="assets/images/mindfulness-door.jpg" alt="Mindfulness"
+           class="w-full h-full object-contain">
     </div>
+
   </div>
 </div>
-
-
 
 
 <div id="mainContent" class="opacity-0 transition-opacity duration-1000">
 
  <div class="flex flex-col items-center gap-2 mt-6">
   <h1 class="text-3xl font-bold">DBT Flashcard Decks</h1>
-  <p class="text-sm text-zinc-700 italic">Explore each skill. Tap or swipe to flip and learn.</p>
+  <p class="text-sm text-zinc-700 italic">Explore each skill. Tap or swipe to flip and learn 👇</p>
   <button id="modeToggle" 
   class="bg-white/50 backdrop-blur-md shadow-md rounded-lg px-4 py-2 text-sm font-semibold text-zinc-800 hover:bg-white/60 transition">Mode: Study</button>
 </div>
