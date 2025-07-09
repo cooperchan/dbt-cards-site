@@ -43,10 +43,10 @@ document.getElementById('modeToggleBottom').addEventListener('click', toggleMode
 const cardsByCategory = {
   emotion: [
     {
-      quizFront: "What is Emotional Regulation and why is it important?",
-      quizTitle: "Emotional Regulation Quiz",
+      quizFront: "What is Emotion Regulation and why is it important?",
+      quizTitle: "Emotion Regulation Quiz",
       studyTitle: "⚡🫙",
-      studyFront: generateStackedCardContent('assets/images/emotionalregulation.png', 'Emotional Regulation'),
+      studyFront: generateStackedCardContent('assets/images/emotionalregulation.png', 'Emotion Regulation'),
       quizBack: "It’s the ability to manage your emotions instead of being controlled by them.\nIt matters because it helps you stay calm, think clearly, and act in ways you won’t regret.",
       studyBack: "the process of identifying and managing emotions in a constructive and healthy way"
     },
