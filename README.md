@@ -15,7 +15,7 @@ A digital DBT flashcard site designed for easy access to evidence-based skills. 
 
 - Flip animations with hover and tap support  
 - Responsive layout for mobile and desktop  
-- Hand-drawn card illustrations by the developer, with custom animations made using paid and open source icons  
+- Custom animations made using paid and open source icons  
 - SEO enabled (sitemap and robots.txt)  
 - Built with HTML, Tailwind CSS, and vanilla JavaScript (no UI libraries or JS frameworks)
 - Hosted via GitHub Pages  
@@ -38,3 +38,8 @@ A digital DBT flashcard site designed for easy access to evidence-based skills. 
 ## 👩🏾‍💻 About the Creator
 
 This project was built to make DBT skills more approachable and accessible. It is designed and maintained by someone with both health tech experience and personal DBT practice.
+
+## Notes
+
+*Earlier versions of the site included hand-drawn card illustrations by the developer. These have since been removed for simplicity and speed.*
+
