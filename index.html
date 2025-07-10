@@ -32,22 +32,16 @@
 
 <body>
 
-<!--<div id="doorIntro" class="fixed inset-0 z-[9999] px-4 flex items-center justify-center h-full transition-opacity duration-1000" style="background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%);"> 
-<div class="absolute bottom-10 w-[500px] h-[280px] rounded-full bg-yellow-200 opacity-40 blur-2xl"></div>
-<div class="relative">
-  <div class="absolute inset-0 z-0 blur-3xl rounded-full bg-[rgba(255,215,0,0.25)] scale-105"></div>
-  <img src="assets/images/sunlit-door.png" alt="Sunlit Door" class="relative z-10 w-[90%] max-w-[600px] md:max-w-[750px] animate-doorFade"
-  />
-</div>
-</div>
--->
 
 
+<!--Working Intro Below Commented out experimentally -->
+
+<!--
 <div id="cardIntro"
      class="fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-opacity duration-[2000ms]"
      style="background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%)">
 
-  <!-- Header Text -->
+  
   <div class="text-center px-4 mb-6">
     <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-white drop-shadow-md">
       🎴 Explore DBT Flashcards Instantly After the Intro Animation
@@ -57,10 +51,10 @@
     </p>
   </div>
 
-  <!-- Intro Deck Cards -->
+
   <div class="grid grid-cols-2 md:flex gap-4">
 
-    <!-- Emotion Regulation -->
+    
     <div class="intro-card w-[120px] sm:w-[140px] md:w-[180px] h-[200px] sm:h-[220px] md:h-[260px] flex flex-col items-center justify-start p-2 bg-white rounded-xl shadow-md">
       <div class="text-sm sm:text-base font-semibold text-black text-center mb-[2px]" style="font-family: 'League Spartan', sans-serif;">
         Emotion <br>Regulation
@@ -69,7 +63,7 @@
            class="w-full h-full object-contain">
     </div>
 
-    <!-- Distress Tolerance -->
+
     <div class="intro-card w-[120px] sm:w-[140px] md:w-[180px] h-[200px] sm:h-[220px] md:h-[260px] flex flex-col items-center justify-start p-2 bg-white rounded-xl shadow-md">
       <div class="text-sm sm:text-base font-semibold text-black text-center mb-[2px]" style="font-family: 'League Spartan', sans-serif;">
         Distress <br>Tolerance
@@ -78,7 +72,7 @@
            class="w-full h-full object-contain">
     </div>
 
-    <!-- Interpersonal Effectiveness -->
+   
     <div class="intro-card w-[120px] sm:w-[140px] md:w-[180px] h-[200px] sm:h-[220px] md:h-[260px] flex flex-col items-center justify-start p-2 bg-white rounded-xl shadow-md">
       <div class="text-sm sm:text-base font-semibold text-black text-center mb-[2px]" style="font-family: 'League Spartan', sans-serif;">
         Interpersonal Effectiveness
@@ -87,7 +81,7 @@
            class="w-full h-full object-contain">
     </div>
 
-    <!-- Mindfulness -->
+
     <div class="intro-card w-[120px] sm:w-[140px] md:w-[180px] h-[200px] sm:h-[220px] md:h-[260px] flex flex-col items-center justify-start p-2 bg-white rounded-xl shadow-md">
       <div class="text-sm sm:text-base font-semibold text-black text-center mb-[2px]" style="font-family: 'League Spartan', sans-serif;">
         Mindfulness<br><br>
@@ -99,12 +93,13 @@
   </div>
 </div>
 
+-->
 
-<div id="mainContent" class="opacity-0 transition-opacity duration-1000">
+<!--<div id="mainContent" class="opacity-0 transition-opacity duration-1000">--> <!--Showing main content afer animation-->
 
  <div class="flex flex-col items-center gap-2 mt-6">
   <h1 class="text-3xl font-bold">DBT Flashcard Decks</h1>
-  <p class="text-sm text-zinc-700 italic">Explore each skill. Tap or swipe to flip and learn 👇</p>
+  <p class="text-sm text-zinc-700 italic">🎴 Explore each skill. Tap or swipe to flip and learn 👇</p>
   <button id="modeToggle" 
   class="bg-white/50 backdrop-blur-md shadow-md rounded-lg px-4 py-2 text-sm font-semibold text-zinc-800 hover:bg-white/60 transition">Mode: Study</button>
 </div>
@@ -170,20 +165,9 @@
 
   <script src="script.js"></script>
 
-  <!--<script>
-window.addEventListener('DOMContentLoaded', () => {
-  const intro = document.getElementById('doorIntro');
-  setTimeout(() => {
-    intro.classList.add('opacity-0');
-    setTimeout(() => {
-      intro.style.display = 'none';
-    }, 1000); // Wait for fade-out transition
-  }, 2500); // Show for 2.5s
-});
-</script>-->
 
 
-<script>
+<!--<script>
   window.addEventListener('DOMContentLoaded', () => {
     const intro = document.getElementById('cardIntro');
     const main = document.getElementById('mainContent');
@@ -199,7 +183,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 3500); // delay to show animation first
   });
 </script>
-
+-->
 
 
 <footer class="w-full mt-12">
@@ -219,8 +203,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
       <div id="aboutContent" class="max-w-xl mt-2 text-sm text-zinc-700 hidden">
         <p>
-          This site, inspired by the work of Dr. Marsha Linehan (creator of Dialectical Behavior Therapy), was built by one person: from coding it from scratch and design to drawing the intro illustrations and writing the flashcard content (with the exception of icons, which were sourced using system emojis, Font Awesome, and Canva). 
-          It was created on a shoestring budget as a personal passion project, with the goal of making DBT skills easier to explore and practice, for free.
+        Inspired by the work of Dr. Marsha Linehan (creator of Dialectical Behavior Therapy), this site was created entirely by one person: from hand-coding and designing it, to writing every flashcard. (Icons were sourced using system emojis, Font Awesome, and Canva.)          
+        It was created on a shoestring budget as a personal passion project, with the goal of making DBT skills easier to explore and practice, for free.
         </p>
         <br>
         <p><b>Disclaimer:</b> These cards are designed as a self-guided learning and reflection tool to support DBT skill practice. They are not a substitute for professional mental health treatment or therapy. 
