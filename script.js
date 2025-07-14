@@ -1529,37 +1529,56 @@ function attachTopCardListeners(card, inner) {
   });
 
   // Click/tap handler
-  inner.addEventListener('click', (e) => {
-    e.stopPropagation();
+inner.addEventListener('click', (e) => {
+  e.stopPropagation();
 
-    if (inputMethod === 'touch') {
-      console.log(`TOUCH CLICK → tapState: ${card.tapState}`);
-      if (card.tapState === 0) {
-        card.classList.add('flipped');
-        card.tapState = 1;
-      } else if (card.tapState === 1) {
-        card.classList.remove('flipped');
-        card.tapState = 2;
-      } else if (card.tapState === 2) {
-        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-        shuffleCard(cat);
-        card.tapState = 0;
+  if (inputMethod === 'touch') {
+    if (card.tapState === 0) {
+      card.classList.add('flipped');
+      card.tapState = 1;
+
+      // ✅ Plausible event: user tapped to flip
+      if (window.plausible) {
+        plausible('CardTapped', {
+          props: {
+            category: card.closest('.card-stack')?.id?.replace('-stack', '') || 'unknown',
+            mode: currentMode || 'study'
+          }
+        });
       }
-    } else if (inputMethod === 'mouse') {
-      console.log(`MOUSE CLICK → clickState: ${card.clickState}`);
-      if (card.clickState === 0) {
-        card.classList.add('flipped');
-        card.clickState = 1;
-      } else if (card.clickState === 1) {
-        card.classList.remove('flipped');
-        card.clickState = 2;
-      } else if (card.clickState === 2) {
-        const cat = card.closest('.card-stack')?.id.replace('-stack', '');
-        shuffleCard(cat);
-        card.clickState = 0;
-      }
+    } else if (card.tapState === 1) {
+      card.classList.remove('flipped');
+      card.tapState = 2;
+    } else if (card.tapState === 2) {
+      const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+      shuffleCard(cat);
+      card.tapState = 0;
     }
-  });
+  } else if (inputMethod === 'mouse') {
+    if (card.clickState === 0) {
+      card.classList.add('flipped');
+      card.clickState = 1;
+
+      // ✅ Plausible event: user clicked to flip
+      if (window.plausible) {
+        plausible('CardTapped', {
+          props: {
+            category: card.closest('.card-stack')?.id?.replace('-stack', '') || 'unknown',
+            mode: currentMode || 'study'
+          }
+        });
+      }
+    } else if (card.clickState === 1) {
+      card.classList.remove('flipped');
+      card.clickState = 2;
+    } else if (card.clickState === 2) {
+      const cat = card.closest('.card-stack')?.id.replace('-stack', '');
+      shuffleCard(cat);
+      card.clickState = 0;
+    }
+  }
+});
+
 }
 
 
