@@ -607,3 +607,39 @@ h1 {
   background-color: rgba(200, 200, 200, 0.6);
   border-radius: 4px;
 }
+
+
+.card.emotion-glow.card-visible {
+  animation: glow-purple 1.4s ease-out forwards;
+}
+.card.distress-glow.card-visible {
+  animation: glow-blue 1.4s ease-out forwards;
+}
+.card.interpersonal-glow.card-visible {
+  animation: glow-green 1.4s ease-out forwards;
+}
+.card.mindfulness-glow.card-visible {
+  animation: glow-yellow 1.4s ease-out forwards;
+}
+
+@keyframes glow-purple {
+  0%, 100% { box-shadow: 0 0 0 rgba(206, 147, 216, 0); }
+  50% { box-shadow: 0 0 80px rgba(206, 147, 216, 0.85); }
+}
+
+@keyframes glow-blue {
+  0%, 100% { box-shadow: 0 0 0 rgba(144, 202, 249, 0); }
+  50% { box-shadow: 0 0 80px rgba(144, 202, 249, 0.85); }
+}
+
+@keyframes glow-green {
+  0%, 100% { box-shadow: 0 0 0 rgba(129, 199, 132, 0); }
+  50% { box-shadow: 0 0 80px rgba(129, 199, 132, 0.85); }
+}
+
+@keyframes glow-yellow {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 224, 130, 0); }
+  50% { box-shadow: 0 0 80px rgba(255, 224, 130, 0.85); }
+}
+
+

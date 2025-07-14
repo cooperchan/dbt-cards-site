@@ -45,8 +45,13 @@ const cardsByCategory = {
     {
       quizFront: "What is Emotion Regulation and why is it important?",
       quizTitle: "Emotion Regulation Quiz",
-      studyTitle: "⚡🫙",
-      studyFront: generateStackedCardContent('assets/images/emotionalregulation.png', 'Emotion Regulation'),
+      studyTitle: "Tap to manage emotions 💜",
+      //studyFront: generateStackedCardContent('assets/images/emotionalregulation.png', 'Emotion Regulation'),
+      studyFront: generateStackedCardContentColored(
+        "assets/images/emotionalregulationshuffle.PNG", 
+        "Emotion Regulation",
+        "linear-gradient(to bottom right, #f3e5f5, #ce93d8)"
+),
       quizBack: "It’s the ability to manage your emotions instead of being controlled by them.\nIt matters because it helps you stay calm, think clearly, and act in ways you won’t regret.",
       studyBack: "the process of identifying and managing emotions in a constructive and healthy way"
     },
@@ -294,8 +299,13 @@ quizBack: `<div class="activity-wrapper">
     {
       quizFront: "What is Distress Tolerance and why is it important?",
       quizTitle: "Distress Tolerance Quiz",
-      studyTitle: "☔🌱",
-      studyFront: generateStackedCardContent('assets/images/distresstolerance.png', 'Distress Tolerance'),
+      studyTitle: "Click to ride the wave 🌊",
+      //studyFront: generateStackedCardContent('assets/images/distresstolerance.png', 'Distress Tolerance'),
+      studyFront: generateStackedCardContentColored(
+  "assets/images/distresstoleranceshuffle.PNG", 
+  "Distress Tolerance",
+  "linear-gradient(to bottom right, #e3f2fd, #90caf9)"
+),
       quizBack: "It helps you survive emotional crises without making things worse.\nIt’s important for staying safe and grounded when emotions feel overwhelming.",
       studyBack: "calmly and successfully navigate difficult or stressful situations without resorting to destructive or self-defeating behaviors"
     },
@@ -821,8 +831,13 @@ Willingness means choosing to work with reality, especially when you'd rather pu
     {
       quizFront: "What is Interpersonal Effectiveness and why is it important?",
       quizTitle: "Interpersonal Effectiveness Quiz",
-      studyTitle: "🌲↔️🌳",
-      studyFront: generateStackedCardContent('assets/images/interpersonaleffectiveness.png', 'Interpersonal Effectiveness'),
+      studyTitle: "Tap to build connection 🤝",
+      //studyFront: generateStackedCardContent('assets/images/interpersonaleffectiveness.png', 'Interpersonal Effectiveness'),
+      studyFront: generateStackedCardContentColored(
+  "assets/images/interpersonaleffectivenessshuffle.PNG", 
+  "Interpersonal Effectiveness",
+  "linear-gradient(to bottom right, #e8f5e9, #81c784)"
+),
       quizBack: "It means getting your needs met while keeping relationships healthy. \nIt’s important for setting boundaries, asking for help, and maintaining mutual respect.",
       studyBack: "improve the way we communicate with others by emphasizing empathy, kindness, setting boundaries, assertiveness, active listening, mutual respect, understanding, and emotional expression"
     },
@@ -1214,8 +1229,13 @@ Through validation, we communicate respect, foster emotional safety, and strengt
     {
       quizFront: "What is Mindfulness and why is it important?",
       quizTitle: "Mindfulness Quiz",
-      studyTitle: "🪷💧",
-      studyFront: generateStackedCardContent('assets/images/mindfulness.png', 'Mindfulness'),
+      studyTitle: "Click to be present 🧘‍♀️",
+      //studyFront: generateStackedCardContent('assets/images/mindfulness.png', 'Mindfulness'),
+      studyFront: generateStackedCardContentColored(
+  "assets/images/mindfulnessshuffle.PNG", 
+  "Mindfulness",
+  "linear-gradient(to bottom right, #fff8e1, #ffe082)"
+),
       quizBack: "It means being fully present in the moment without judgment. \nIt helps reduce stress, improve focus, and manage emotions more effectively.",
       studyBack: "intentionally attentive to the present moment"
     },
@@ -1662,6 +1682,14 @@ function generateStackedCardContent(iconPath, titleText) {
 }
 
 
+function generateStackedCardContentColored(iconPath, titleText, bgGradient) {
+  return "<div style='display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; width:100%; box-sizing:border-box; gap:8px; background:" + bgGradient + "; border-radius:12px; padding:12px; text-align:center'>  <img src='" + iconPath + "' alt='icon top' style='height:60px; width:auto'>  <div style='font-size:1.8rem; font-weight:700; line-height:1.2; word-break:break-word'>" + titleText.replace(" ", "<br>") + "</div>  <img src='" + iconPath + "' alt='icon bottom flipped' style='height:60px; width:auto; transform:scaleY(-1)'>  </div>";
+}
+
+
+
+
+
 function renderDropdown(category) {
   const dropdownContainer = document.getElementById(`${category}-dropdown`);
   if (!dropdownContainer) return;
@@ -1700,6 +1728,7 @@ function renderDropdown(category) {
   dropdownContainer.appendChild(select);
 }
 
+
 function attachIconRevealListeners() {
   document.querySelectorAll('.icon-transform-container').forEach(container => {
     if (!container.dataset.bound) {
@@ -1714,5 +1743,52 @@ function attachIconRevealListeners() {
 
 document.addEventListener('DOMContentLoaded', () => {
   Object.keys(cardsByCategory).forEach(renderDeck);
+  const stacks = document.querySelectorAll('.card-stack');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const topCard = entry.target.querySelector('.card:nth-child(1)');
+      if (topCard && !topCard.classList.contains('card-visible')) {
+        if (topCard) {
+  const deckLabel = entry.target.closest('.deck')?.querySelector('.deck-label')?.textContent?.toLowerCase() || '';
+
+  if (deckLabel.includes('emotion')) {
+    topCard.classList.add('card-visible', 'emotion-glow');
+  } else if (deckLabel.includes('distress')) {
+    topCard.classList.add('card-visible', 'distress-glow');
+  } else if (deckLabel.includes('interpersonal')) {
+    topCard.classList.add('card-visible', 'interpersonal-glow');
+  } else if (deckLabel.includes('mindfulness')) {
+    topCard.classList.add('card-visible', 'mindfulness-glow');
+  } else {
+    topCard.classList.add('card-visible'); // fallback
+  }
+
+  // Remove all glow classes after animation
+  setTimeout(() => {
+    topCard.classList.remove(
+      'card-visible',
+      'emotion-glow',
+      'distress-glow',
+      'interpersonal-glow',
+      'mindfulness-glow'
+    );
+  }, 1600);
+}
+
+
+        setTimeout(() => {
+          topCard.classList.remove('card-visible');
+        }, 1600); // match animation duration
+      }
+    }
+  });
+}, {
+  threshold: 0.5
+});
+
+stacks.forEach(stack => observer.observe(stack));
+
 });
 
