@@ -642,4 +642,21 @@ h1 {
   50% { box-shadow: 0 0 80px rgba(255, 224, 130, 0.85); }
 }
 
+a {
+  color: #3366cc; /* or any standout color */
+  text-decoration: underline;
+  font-weight: 500; /* optional, to make it stand out more */
+}
+
+a:hover {
+  color: #003399; /* darker on hover */
+  text-decoration: underline;
+}
+
+a.emphasized-link {
+  color: #3366cc;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
 
