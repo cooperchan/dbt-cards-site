@@ -1537,7 +1537,7 @@ inner.addEventListener('click', (e) => {
       card.classList.add('flipped');
       card.tapState = 1;
 
-      // ✅ Plausible event: user tapped to flip
+      // Plausible event: user tapped to flip
       if (window.plausible) {
         plausible('CardTapped', {
           props: {
@@ -1559,7 +1559,7 @@ inner.addEventListener('click', (e) => {
       card.classList.add('flipped');
       card.clickState = 1;
 
-      // ✅ Plausible event: user clicked to flip
+      // Plausible event: user clicked to flip
       if (window.plausible) {
         plausible('CardTapped', {
           props: {
